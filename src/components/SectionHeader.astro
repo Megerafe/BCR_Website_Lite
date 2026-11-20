@@ -1,0 +1,21 @@
+---
+/** Section title row: big lowercase title on the left, optional text and button on the right. */
+interface Props {
+  title: string;
+  text?: string;
+  cta?: { label: string; href: string };
+  id?: string;
+  as?: 'h1' | 'h2';
+  class?: string;
+}
+const { title, text, cta, id, as: Tag = 'h2', class: className = '' } = Astro.props;
+---
+
+<div class:list={['flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-10', className]} data-reveal>
+  <div class="max-w-2xl">
+    <Tag id={id} class="display-bold text-display">{title}</Tag>
+    {text && <p class="mt-4 max-w-xl text-cocoa/90">{text}</p>}
+  </div>
+  {cta && <a href={cta.href} class="btn btn-outline shrink-0 self-start md:self-auto">{cta.label}</a>}
+  <slot />
+</div>

@@ -1,0 +1,116 @@
+# ════════════════════════════════════════════════════════════════
+#  PORTFOLIO
+#  ⚠ The images below are AI-generated MOOD IMAGES for the preview.
+#    Replace them with real client work (with the client's permission)
+#    before the site goes live.
+#
+#  id       – unique name (no spaces / ä / ö)
+#  title    – short caption
+#  client   – client name or type of business (optional)
+#  category – used for the filter buttons. Items with the same text are
+#             grouped together, so keep the spelling identical.
+#  image    – the photo (or the cover image of a video)
+#  alt      – a short description of the image for screen readers
+#  video    – optional: path to an .mp4 in /public/videos, e.g. /videos/reel.mp4
+#  shape    – tall | square | wide  (how much space it takes in the grid)
+#  featured – true = also shown on the homepage
+# ════════════════════════════════════════════════════════════════
+
+- id: kynnet
+  title: Geelikynsien lähikuvat
+  client: Kynsistudio
+  category: Sisällöntuotanto
+  image: ../assets/images/portfolio/nails.jpg
+  alt: Vaaleanpunaiset mantelinmuotoiset geelikynnet satiinikankaalla
+  shape: tall
+  featured: true
+
+- id: feed
+  title: Yhtenäinen feed
+  client: Kauneushoitola
+  category: Some-ilme
+  image: ../assets/images/services/feed.jpg
+  alt: Yhdeksän vaaleanpunaisen sävyistä kuvaa ruudukossa
+  shape: square
+  featured: true
+
+- id: ripset
+  title: Ripsienpidennykset
+  client: Ripsistudio
+  category: Sisällöntuotanto
+  image: ../assets/images/portfolio/lashes.jpg
+  alt: Lähikuva suljetusta silmästä ja luonnollisista ripsienpidennyksistä
+  shape: tall
+  featured: true
+
+- id: hoito
+  title: Kasvohoito Reelsiin
+  client: Ihonhoitola
+  category: UGC
+  image: ../assets/images/portfolio/facial.jpg
+  alt: Kosmetologi levittää vaaleanpunaista savinaamiota siveltimellä
+  shape: tall
+  featured: true
+
+- id: seerumi
+  title: Tuotekuvat
+  client: Ihonhoitobrändi
+  category: Sisällöntuotanto
+  image: ../assets/images/portfolio/serum.jpg
+  alt: Seerumipullo pipetillä vaaleanpunaisella taustalla
+  shape: square
+  featured: true
+
+- id: hoitola
+  title: Hoitolan tunnelmakuvat
+  client: Kauneushoitola
+  category: Some-ilme
+  image: ../assets/images/portfolio/salon.jpg
+  alt: Vaaleanpunainen hoitohuone, samettituoli ja kaareva peili
+  shape: wide
+  featured: false
+
+- id: hiukset
+  title: Föönikampaus
+  client: Kampaamo
+  category: UGC
+  image: ../assets/images/portfolio/hair.jpg
+  alt: Kiiltävät karamellinruskeat laineet takaapäin kuvattuna
+  shape: tall
+  featured: false
+
+- id: brandi
+  title: Värimaailma ja ilme
+  client: Uusi kauneusyritys
+  category: Brändäys
+  image: ../assets/images/services/brand.jpg
+  alt: Värimallit vaaleanpunaisen, beigen ja ruskean sävyissä
+  shape: square
+  featured: false
+
+- id: kulmat
+  title: Kulmastudion tuotteet
+  client: Kulmastudio
+  category: Some-ilme
+  image: ../assets/images/portfolio/brows.jpg
+  alt: Kulmatyökalut ja tuotteet marmorilla
+  shape: tall
+  featured: false
+
+- id: logo
+  title: Logo ja käyntikortit
+  client: BeautyContentRoom
+  category: Brändäys
+  image: ../assets/images/services/logo.jpg
+  alt: BCR-logo kohopainettuna vaaleanpunaiseen käyntikorttiin
+  shape: wide
+  featured: false
+
+- id: kiilto
+  title: Huulikiilto-swatch
+  client: Kosmetiikkabrändi
+  category: Sisällöntuotanto
+  image: ../assets/images/portfolio/gloss.jpg
+  alt: Ruusunpunainen huulikiiltoswatch ja tuubi valkoisella pinnalla
+  shape: tall
+  featured: false

@@ -1,0 +1,28 @@
+---
+/** Questions & answers as an accessible accordion. Data: faq.yaml */
+import { getOrdered } from '../lib/content';
+import Icon from './Icon.astro';
+const faq = await getOrdered('faq');
+---
+
+<div class="border-t border-cocoa/15">
+  {
+    faq.map((item) => (
+      <details class="faq group border-b border-cocoa/15" name="faq">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-ink">
+          <span class="font-medium">{item.data.question}</span>
+          <span class="flex size-9 shrink-0 items-center justify-center rounded-full border border-cocoa/20 transition-transform duration-500 group-open:rotate-45">
+            <Icon name="plus" class="size-4" />
+          </span>
+        </summary>
+        <p class="max-w-2xl pb-6 pr-12 text-cocoa/90">{item.data.answer}</p>
+      </details>
+    ))
+  }
+</div>
+
+<style>
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

@@ -1,0 +1,275 @@
+---
+/**
+ * ETUSIVU + OTA YHTEYTTÄ – one-page Lite website.
+ * All texts and images come from src/content/ (home.yaml, services.yaml, packages.yaml,
+ * portfolio.yaml, pages.yaml, faq.yaml, site.yaml).
+ */
+import { getOrdered } from '../lib/content';
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ServiceCarousel from '../components/ServiceCarousel.astro';
+import PackageCards from '../components/PackageCards.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import ContactForm from '../components/ContactForm.astro';
+import FaqList from '../components/FaqList.astro';
+import Icon from '../components/Icon.astro';
+import contactImage from '../assets/images/pages/contact-still.jpg';
+
+const home = (await getEntry('home', 'main'))!.data;
+const site = (await getEntry('site', 'main'))!.data;
+const contact = (await getEntry('pages', 'yhteys'))!.data;
+const featured = (await getOrdered('portfolio')).filter((p) => p.data.featured);
+const { hero, intro, services, split, packages, portfolio, process, about } = home;
+---
+
+<BaseLayout title={home.seo.title} description={home.seo.description}>
+  <!-- 1 · HERO ─────────────────────────────────────────────── -->
+  <section class="px-gutter pt-1" aria-labelledby="hero-title">
+    <div class="panel grid lg:min-h-[min(86vh,860px)] lg:grid-cols-12">
+      <div class="flex flex-col justify-end bg-blush-50 px-6 pb-8 pt-12 sm:px-10 sm:pb-12 lg:col-span-5 lg:px-12 lg:pb-14 xl:px-14">
+        <p class="eyebrow">{hero.eyebrow}</p>
+        <h1 id="hero-title" class="display-thin mt-5 text-[clamp(2.75rem,1rem+4.1vw,5.5rem)] leading-[0.98]">{hero.title}</h1>
+        <p class="mt-6 max-w-md text-ink">{hero.text}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={hero.primary.href} class="btn btn-primary">{hero.primary.label}</a>
+          <a href={hero.secondary.href} class="btn btn-outline">{hero.secondary.label}</a>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 lg:col-span-7">
+        <div class="relative aspect-[3/4] overflow-hidden lg:aspect-auto">
+          <Image
+            src={hero.image}
+            alt={hero.imageAlt}
+            widths={[400, 640, 900, 1200]}
+            sizes="(min-width: 1024px) 30vw, 50vw"
+            class="absolute inset-0 size-full object-cover"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+        {
+          hero.secondImage && (
+            <div class="relative aspect-[3/4] overflow-hidden lg:aspect-auto">
+              <Image
+                src={hero.secondImage}
+                alt={hero.secondImageAlt}
+                widths={[400, 640, 900, 1200]}
+                sizes="(min-width: 1024px) 30vw, 50vw"
+                class="absolute inset-0 size-full object-cover"
+                loading="eager"
+              />
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · INTRO STATEMENT ────────────────────────────────────── -->
+  <section class="px-gutter pt-gutter" aria-labelledby="intro-title">
+    <div class="panel relative bg-blush-50 md:min-h-[32rem] lg:min-h-[38rem]" data-reveal="clip">
+      <div class="relative aspect-[16/7] md:absolute md:inset-0 md:aspect-auto">
+        <Image
+          src={intro.image}
+          alt=""
+          widths={[800, 1200, 1800, 2400]}
+          sizes="100vw"
+          class="absolute inset-0 size-full object-cover"
+        />
+      </div>
+      <div class="relative mx-auto flex max-w-2xl flex-col items-center px-6 py-14 text-center md:py-32 lg:py-40">
+        <h2 id="intro-title" class="display-thin text-display">{intro.title}</h2>
+        <p class="mt-6 max-w-lg text-ink">{intro.text}</p>
+        <a href={intro.cta.href} class="btn btn-outline mt-8">{intro.cta.label}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · SERVICES ──────────────────────────────────────────── -->
+  <section id="palvelut" class="pt-[var(--spacing-section)]" aria-labelledby="palvelut-title">
+    <SectionHeader id="palvelut-title" title={services.title} text={services.text} cta={services.cta} class="px-gutter" />
+    <div class="mt-10 lg:mt-14">
+      <ServiceCarousel />
+    </div>
+  </section>
+
+  <!-- 4 · SPLIT PANEL ───────────────────────────────────────── -->
+  <section class="px-gutter pt-[var(--spacing-section)]" aria-labelledby="split-title">
+    <div class="panel grid bg-tan-50 md:grid-cols-2">
+      <div class="flex flex-col justify-center px-6 py-12 sm:px-10 lg:px-16 lg:py-20" data-reveal>
+        <p class="eyebrow">{split.eyebrow}</p>
+        <h2 id="split-title" class="display-bold mt-4 text-display">{split.title}</h2>
+        <p class="mt-6 max-w-md text-cocoa/95">{split.text}</p>
+        <a href={split.cta.href} class="btn btn-outline mt-8 self-start">{split.cta.label}</a>
+      </div>
+      <div class="relative aspect-[4/5] overflow-hidden md:aspect-auto md:min-h-[36rem]">
+        <Image
+          src={split.image}
+          alt={split.imageAlt}
+          widths={[600, 900, 1300]}
+          sizes="(min-width: 768px) 50vw, 100vw"
+          class="absolute inset-0 size-full object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · PACKAGES ──────────────────────────────────────────── -->
+  <section id="paketit" class="pt-[var(--spacing-section)]" aria-labelledby="paketit-title">
+    <SectionHeader id="paketit-title" title={packages.title} text={packages.text} class="px-gutter" />
+    <div class="mt-10 lg:mt-14">
+      <PackageCards customTitle={packages.customTitle} customText={packages.customText} customCta={packages.customCta} />
+    </div>
+  </section>
+
+  <!-- 6 · PORTFOLIO PREVIEW ─────────────────────────────────── -->
+  <section id="portfolio" class="px-gutter pt-[var(--spacing-section)]" aria-labelledby="portfolio-title">
+    <div class="panel bg-blush-50 py-8 sm:py-10 lg:py-12">
+      <div class="flex flex-col gap-5 px-6 sm:px-8 md:flex-row md:items-end md:justify-between lg:px-10">
+        <div>
+          <h2 id="portfolio-title" class="display-bold text-display">{portfolio.title}</h2>
+          <p class="mt-3 max-w-md text-cocoa/90">{portfolio.text}</p>
+        </div>
+        <a href={portfolio.cta.href} class="btn btn-outline shrink-0 self-start md:self-auto">{portfolio.cta.label}</a>
+      </div>
+      <ul class="scroller mt-8 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-6 px-6 sm:px-8 lg:mt-10 lg:gap-4 lg:px-10">
+        {
+          featured.map((item) => (
+            <li class="w-[68%] shrink-0 snap-start sm:w-[40%] lg:w-[calc((100%-4rem)/4.4)]">
+              <div class="group block">
+                <div class="aspect-[3/4] overflow-hidden rounded-card bg-white">
+                  <Image
+                    src={item.data.image}
+                    alt={item.data.alt}
+                    widths={[360, 540, 800]}
+                    sizes="(min-width: 1024px) 22vw, (min-width: 640px) 40vw, 68vw"
+                    class="zoom-img size-full object-cover"
+                  />
+                </div>
+                <p class="label mt-3 text-ink">{item.data.client}</p>
+                <p class="text-sm text-cocoa/90">{item.data.title}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- 7 · PROCESS ───────────────────────────────────────────── -->
+  <section id="prosessi" class="pt-[var(--spacing-section)]" aria-labelledby="process-title">
+    <SectionHeader id="process-title" title={process.title} text={process.text} class="px-gutter" />
+    <div class="mt-10 lg:mt-14">
+      <ProcessSteps steps={process.steps} />
+    </div>
+  </section>
+
+  <!-- 8 · ABOUT TEASER ──────────────────────────────────────── -->
+  <section id="tietoa" class="px-gutter pt-[var(--spacing-section)]" aria-labelledby="about-title">
+    <div class="grid gap-3 sm:gap-4 md:grid-cols-12 lg:gap-5">
+      <div class="panel relative aspect-[4/5] md:col-span-5 md:aspect-auto md:min-h-[34rem]" data-reveal="clip">
+        <Image
+          src={about.image}
+          alt={about.imageAlt}
+          widths={[500, 800, 1100]}
+          sizes="(min-width: 768px) 40vw, 100vw"
+          class="absolute inset-0 size-full object-cover"
+        />
+      </div>
+      <div class="panel flex flex-col justify-end bg-tan-50 px-6 py-12 sm:px-10 md:col-span-7 lg:px-16 lg:py-16" data-reveal>
+        <p class="eyebrow">{about.eyebrow}</p>
+        <h2 id="about-title" class="display-thin mt-4 text-display">{about.title}</h2>
+        <p class="mt-6 max-w-lg text-ink">{about.text}</p>
+        <a href={about.cta.href} class="btn btn-outline mt-8 self-start">{about.cta.label}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · OTA YHTEYTTÄ (FULL CONTACT SECTION) ───────────────── -->
+  <section id="yhteys" class="px-gutter pt-[var(--spacing-section)]" aria-labelledby="contact-title">
+    <div class="grid gap-3 sm:gap-4 lg:grid-cols-12 lg:gap-5">
+      <!-- left: intro + contact details + still-life photo -->
+      <div class="flex flex-col gap-3 sm:gap-4 lg:col-span-5 lg:gap-5">
+        <div class="panel bg-blush-50 px-6 pb-10 pt-12 sm:px-10 lg:px-12 lg:pb-12 lg:pt-16" data-reveal>
+          {contact.eyebrow && <p class="eyebrow">{contact.eyebrow}</p>}
+          <h2 id="contact-title" class="display-thin mt-4 text-hero">{contact.title}</h2>
+          <p class="mt-6 max-w-md text-ink">{contact.intro}</p>
+          <ul class="mt-10 space-y-3 border-t border-cocoa/15 pt-6 text-ink">
+            {
+              site.email && (
+                <li class="flex items-center gap-3">
+                  <Icon name="mail" class="size-5 text-rose-deep" />
+                  <a href={`mailto:${site.email}`} class="text-link">
+                    {site.email}
+                  </a>
+                </li>
+              )
+            }
+            {
+              site.phone && (
+                <li class="flex items-center gap-3">
+                  <Icon name="phone" class="size-5 text-rose-deep" />
+                  <a href={`tel:${site.phone.replace(/\s/g, '')}`} class="text-link">
+                    {site.phone}
+                  </a>
+                </li>
+              )
+            }
+            {
+              site.instagram?.url && (
+                <li class="flex items-center gap-3">
+                  <Icon name="instagram" class="size-5 text-rose-deep" />
+                  <a href={site.instagram.url} target="_blank" rel="noopener noreferrer" class="text-link">
+                    {site.instagram.handle || 'Instagram'}
+                  </a>
+                </li>
+              )
+            }
+            {
+              (site.location || site.serviceArea) && (
+                <li class="flex items-start gap-3">
+                  <Icon name="map-pin" class="mt-0.5 size-5 shrink-0 text-rose-deep" />
+                  <span>{[site.location, site.serviceArea].filter(Boolean).join(' · ')}</span>
+                </li>
+              )
+            }
+          </ul>
+        </div>
+        <div class="panel relative hidden flex-1 lg:block lg:min-h-[22rem]" data-reveal="clip">
+          <Image
+            src={contactImage}
+            alt="Vaaleanpunaiset tulppaanit maljakossa valoisalla pöydällä"
+            widths={[600, 900]}
+            sizes="40vw"
+            class="absolute inset-0 size-full object-cover"
+          />
+        </div>
+      </div>
+
+      <!-- right: contact form -->
+      <div class="panel bg-tan-50 px-5 py-8 sm:px-10 sm:py-12 lg:col-span-7 lg:px-12 lg:py-14" data-reveal>
+        <h3 class="display-bold text-title">{contact.formTitle || 'kerro, mitä tarvitset'}</h3>
+        <p class="mt-2 max-w-lg text-sm text-cocoa/90">
+          {contact.formIntro || 'Vastaan kaikkiin viesteihin henkilökohtaisesti. Tarjouspyyntö ei sido sinua mihinkään.'}
+        </p>
+        <div class="mt-8">
+          <ContactForm />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · FAQ ──────────────────────────────────────────────── -->
+  <section id="ukk" class="px-gutter pt-[var(--spacing-section)]" aria-labelledby="faq-title">
+    <div class="grid gap-8 lg:grid-cols-12">
+      <div class="lg:col-span-4" data-reveal>
+        <h2 id="faq-title" class="display-bold text-display">usein kysyttyä</h2>
+      </div>
+      <div class="lg:col-span-8" data-reveal>
+        <FaqList />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

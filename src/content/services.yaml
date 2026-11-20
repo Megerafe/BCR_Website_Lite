@@ -1,0 +1,132 @@
+# ════════════════════════════════════════════════════════════════
+#  PALVELUT · services
+#  Each item starting with "- id:" is one service card.
+#  The cards appear in this order on the homepage and the services page.
+#
+#  id        – short unique name, no spaces or ä/ö (used in links)
+#  word      – the big word on the card (short, lowercase works best)
+#  title     – the service name
+#  short     – one sentence for the card
+#  description – longer text on the services page
+#  includes  – bullet list "what you get"
+#  price     – e.g. "alk. 290 €". Leave "" to show "Pyydä tarjous".
+#  image     – card image (portrait images look best)
+# ════════════════════════════════════════════════════════════════
+
+- id: sisallontuotanto
+  word: content
+  title: Sisällöntuotanto
+  short: Kuvat ja videot, jotka saavat palvelusi näyttämään yhtä hyviltä kuin ne ovat.
+  description: >-
+    Suunnittelen ja kuvaan sisällön yrityksesi someen: tunnelmakuvat,
+    lähikuvat töistäsi, tuotekuvat ja lyhyet videot. Kaikki samalla
+    visuaalisella otteella, jotta feedistä tulee yhtenäinen ja harkitun näköinen.
+  includes:
+    - Sisältösuunnitelma ja kuvauslista
+    - Kuvaus hoitolassasi tai sovitussa paikassa
+    - Editoidut kuvat ja lyhyet videot
+    - Tekstiehdotukset julkaisuihin
+  price: ""
+  image: ../assets/images/services/content.jpg
+  imageAlt: Vaaleanpunainen kosmetiikkapurkki, jota kuvataan puhelimella
+
+- id: ugc
+  word: ugc
+  title: UGC-videot
+  short: Aidon tuntuiset videot, joissa palvelusi ja tuotteesi pääsevät oikeasti esiin.
+  description: >-
+    UGC-tyylinen video tuntuu suositukselta eikä mainokselta. Teen
+    pystyvideot Reelsiin, TikTokiin ja mainoksiin – ideasta ja
+    käsikirjoituksesta valmiiseen editointiin.
+  includes:
+    - Ideointi ja käsikirjoitus
+    - Kuvaus ja editointi
+    - Tekstitykset ja musiikki
+    - Pystyformaatti Reelsiin ja TikTokiin
+  price: ""
+  image: ../assets/images/services/ugc.jpg
+  imageAlt: Kädet kuvaavat huulikiillon käyttöä puhelimella
+
+- id: some-ilme
+  word: feed
+  title: Some-tilien yhtenäistäminen
+  short: Instagram, TikTok ja Facebook samaan, tunnistettavaan ilmeeseen.
+  description: >-
+    Käyn läpi nykyiset tilisi ja yhtenäistän profiilikuvat, biot,
+    kohokohtien kannet, värit ja julkaisupohjat. Lopputuloksena feed, joka
+    näyttää harkitulta jo ensisilmäyksellä.
+  includes:
+    - Profiilien ja biojen päivitys
+    - Kohokohtien kannet
+    - Julkaisu- ja story-pohjat
+    - Värit ja fontit someen
+  price: ""
+  image: ../assets/images/services/feed.jpg
+  imageAlt: Yhdeksän vaaleanpunaista valokuvaa siistissä ruudukossa kuin some-feed
+
+- id: brandays
+  word: brand
+  title: Brändäys
+  short: Visuaalinen ilme ja tunnelma, joka erottaa sinut muista.
+  description: >-
+    Määritellään yhdessä, miltä yrityksesi näyttää, kuulostaa ja tuntuu.
+    Rakennan brändille värit, typografian, kuvatyylin ja selkeät ohjeet,
+    joiden avulla ilme pysyy samana jokaisessa kanavassa.
+  includes:
+    - Brändin tunnelmataulu
+    - Värit ja typografia
+    - Kuvatyyli ja äänensävy
+    - Tiivis brändiohje
+  price: ""
+  image: ../assets/images/services/brand.jpg
+  imageAlt: Värimallit vaaleanpunaisen, beigen ja ruskean sävyissä
+
+- id: logo
+  word: logo
+  title: Logo
+  short: Selkeä ja kaunis logo, joka toimii yhtä hyvin somessa kuin ikkunassa.
+  description: >-
+    Suunnittelen yrityksellesi logon ja sen versiot eri käyttötarkoituksiin.
+    Saat tiedostot valmiina someen, verkkosivuille ja painotuotteisiin.
+  includes:
+    - Logoehdotukset ja viimeistely
+    - Vaaka- ja pystyversiot
+    - Värivaihtoehdot
+    - Tiedostot verkkoon ja painoon
+  price: ""
+  image: ../assets/images/services/logo.jpg
+  imageAlt: BCR-logo kohopainettuna vaaleanpunaiseen käyntikorttiin
+
+- id: materiaalit
+  word: visuals
+  title: Verkkosivu- ja somemateriaalit
+  short: Hinnastot, bannerit, kansikuvat ja grafiikat samaan ilmeeseen.
+  description: >-
+    Teen yrityksellesi materiaalit, joita tarvitset arjessa: hinnastot,
+    kampanjagrafiikat, verkkosivujen kuvat ja bannerit, lahjakortit sekä
+    some-pohjat, joita voit muokata itse.
+  includes:
+    - Hinnastot ja lahjakortit
+    - Verkkosivujen kuvat ja bannerit
+    - Kampanjagrafiikat
+    - Muokattavat pohjat
+  price: ""
+  image: ../assets/images/services/visuals.jpg
+  imageAlt: Kannettava tietokone ja puhelin vaaleanpunaisilla näkymillä valkoisella pöydällä
+
+- id: nakokulma
+  word: insight
+  title: Ulkopuolinen näkökulma brändiin
+  short: Rehellinen ja rakentava katsaus siihen, miltä brändisi näyttää asiakkaan silmin.
+  description: >-
+    Omaa yritystä on joskus vaikea nähdä ulkopuolisen silmin. Käyn läpi somesi,
+    verkkosivusi ja visuaalisen ilmeesi ja kerron selkeästi, mikä toimii, mikä
+    ei – ja mistä kannattaa aloittaa.
+  includes:
+    - Some- ja verkkosivukatsaus
+    - Konkreettiset kehitysehdotukset
+    - Selkeä toimenpidelista
+    - Purkupalaveri
+  price: ""
+  image: ../assets/images/services/insight.jpg
+  imageAlt: Suurennuslasi vaaleanpunaisten kauneuskuvien päällä

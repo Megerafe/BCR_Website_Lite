@@ -1,0 +1,36 @@
+---
+/** Numbered process steps. Horizontally scrollable on mobile, grid on tablet/desktop. Data: home.yaml → process */
+interface Props {
+  steps: { title: string; text: string }[];
+}
+const { steps } = Astro.props;
+---
+
+<div data-mobile-scroller data-reveal>
+  <ol
+    class="scroller flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-gutter px-gutter pb-2 md:grid md:grid-cols-2 md:gap-x-5 md:gap-y-10 md:overflow-visible md:pb-0 lg:grid-cols-4"
+    data-track
+  >
+    {
+      steps.map((s, i) => (
+        <li class="w-[76%] shrink-0 snap-start border-t border-cocoa/15 pt-5 sm:w-[48%] md:w-auto md:shrink">
+          <span class="display-thin block text-[3.75rem] leading-none !text-rose" aria-hidden="true">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <h3 class="label mt-8 text-ink">
+            <span class="sr-only">Vaihe {i + 1}: </span>
+            {s.title}
+          </h3>
+          <p class="mt-2 max-w-xs text-sm leading-relaxed text-cocoa/90">{s.text}</p>
+        </li>
+      ))
+    }
+  </ol>
+
+  <!-- Mobile-only progress indicator -->
+  <div class="mt-4 px-gutter md:hidden" aria-hidden="true">
+    <div class="h-px w-full bg-cocoa/10">
+      <div class="h-px w-1/4 bg-cocoa transition-[width] duration-300" data-progress></div>
+    </div>
+  </div>
+</div>

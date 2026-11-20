@@ -1,0 +1,242 @@
+---
+/** Sticky header for one-page Lite site: anchor navigation left, logo centre, Instagram + contact button right. */
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  site: {
+    name: string;
+    nav: { label: string; href: string }[];
+    cta: { label: string; href: string };
+    instagram?: { handle?: string; url?: string };
+    email?: string;
+  };
+}
+const { site } = Astro.props;
+const isHome = Astro.url.pathname === '/';
+const resolveHref = (href: string) => (!isHome && href.startsWith('#') ? `/${href}` : href);
+---
+
+<header class="site-header sticky top-0 z-50 px-gutter" data-header>
+  <div class="header-bar grid h-16 grid-cols-[1fr_auto_1fr] items-center gap-4 lg:h-[4.5rem]">
+    <!-- left: desktop navigation / mobile menu button -->
+    <nav aria-label="Päävalikko" class="hidden lg:block">
+      <ul class="flex items-center gap-5 xl:gap-7">
+        {
+          site.nav.map((item) => (
+            <li>
+              <a
+                href={resolveHref(item.href)}
+                class="nav-link label !text-[0.8125rem] text-cocoa"
+                data-nav-link={item.href.startsWith('#') ? item.href.slice(1) : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <button
+      type="button"
+      class="menu-toggle -ml-2 flex size-11 items-center justify-center rounded-full text-cocoa lg:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Avaa valikko"
+      data-menu-toggle
+    >
+      <Icon name="menu" class="icon-open size-6" />
+      <Icon name="x" class="icon-close hidden size-6" />
+    </button>
+
+    <!-- centre: logo -->
+    <a href={isHome ? '#top' : '/'} class="logo-link flex items-center justify-center text-rose" aria-label={`${site.name} – alkuun`}>
+      <Logo class="h-6 w-auto lg:h-8" title={site.name} />
+    </a>
+
+    <!-- right: instagram + contact -->
+    <div class="flex items-center justify-end gap-3">
+      {
+        site.instagram?.url && (
+          <a
+            href={site.instagram.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hidden size-11 items-center justify-center rounded-full text-cocoa transition-colors hover:bg-blush-50 lg:flex"
+            aria-label="Instagram (avautuu uuteen välilehteen)"
+          >
+            <Icon name="instagram" class="size-5" />
+          </a>
+        )
+      }
+      <a href={resolveHref(site.cta.href)} class="btn btn-primary btn-sm hidden sm:inline-flex">{site.cta.label}</a>
+      <a href={resolveHref(site.cta.href)} class="label !text-[0.75rem] text-cocoa underline underline-offset-4 sm:hidden">yhteys</a>
+    </div>
+  </div>
+
+  <!-- mobile menu -->
+  <div id="mobile-menu" class="mobile-menu lg:hidden" hidden data-menu>
+    <nav aria-label="Mobiilivalikko" class="flex h-full flex-col justify-between px-2 pb-8 pt-4">
+      <ul class="flex flex-col">
+        <li class="border-b border-cocoa/10">
+          <a href={isHome ? '#top' : '/'} class="display-thin block py-3 text-[2.75rem] leading-tight" data-mobile-link>etusivu</a>
+        </li>
+        {
+          site.nav.map((item) => (
+            <li class="border-b border-cocoa/10">
+              <a
+                href={resolveHref(item.href)}
+                class="display-thin block py-3 text-[2.75rem] leading-tight"
+                data-mobile-link
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="flex flex-col gap-4 pt-6">
+        <a href={resolveHref(site.cta.href)} class="btn btn-primary w-full" data-mobile-link>{site.cta.label}</a>
+        <div class="flex items-center justify-between text-sm">
+          {site.email && <a href={`mailto:${site.email}`} class="text-link">{site.email}</a>}
+          {
+            site.instagram?.url && (
+              <a href={site.instagram.url} target="_blank" rel="noopener noreferrer" class="text-link">
+                {site.instagram.handle || 'Instagram'}
+              </a>
+            )
+          }
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: rgb(255 255 255 / 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: box-shadow 0.4s var(--ease-soft);
+  }
+  .site-header.is-scrolled {
+    box-shadow: 0 1px 0 rgb(91 70 60 / 0.08);
+  }
+  .nav-link {
+    position: relative;
+    padding-block: 0.5rem;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.2rem;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s var(--ease-soft);
+  }
+  .nav-link:hover::after,
+  .nav-link.is-active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  .mobile-menu {
+    position: fixed;
+    top: 4rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    padding-inline: var(--spacing-gutter);
+    overflow-y: auto;
+  }
+  .mobile-menu:not([hidden]) {
+    animation: menu-in 0.45s var(--ease-soft);
+  }
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .menu-toggle[aria-expanded='true'] .icon-open {
+    display: none;
+  }
+  .menu-toggle[aria-expanded='true'] .icon-close {
+    display: block;
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-menu]');
+
+  const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const setOpen = (open: boolean) => {
+    if (!toggle || !menu) return;
+    if (open && header) menu.style.top = `${Math.round(header.getBoundingClientRect().bottom)}px`;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Sulje valikko' : 'Avaa valikko');
+    menu.hidden = !open;
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+  };
+
+  toggle?.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  menu?.querySelectorAll<HTMLAnchorElement>('[data-mobile-link]').forEach((link) => {
+    link.addEventListener('click', () => setOpen(false));
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+  window.matchMedia('(min-width: 1024px)').addEventListener('change', (e) => e.matches && setOpen(false));
+
+  // Scrollspy: highlight the active section link as the user scrolls down the one-page site
+  const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]'));
+  const sectionPairs = navLinks
+    .map((link) => {
+      const id = link.dataset.navLink;
+      const section = id ? document.getElementById(id) : null;
+      return section ? { id: id!, link, section } : null;
+    })
+    .filter((item): item is { id: string; link: HTMLAnchorElement; section: HTMLElement } => item !== null);
+
+  if (sectionPairs.length && 'IntersectionObserver' in window) {
+    const visible = new Set<string>();
+    const updateActive = () => {
+      if (window.scrollY < 160) {
+        navLinks.forEach((l) => l.classList.remove('is-active'));
+        return;
+      }
+      const active = sectionPairs.find((p) => visible.has(p.id));
+      if (!active) return;
+      navLinks.forEach((l) => l.classList.toggle('is-active', l === active.link));
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visible.add(entry.target.id);
+          else visible.delete(entry.target.id);
+        }
+        updateActive();
+      },
+      { rootMargin: '-25% 0px -55% 0px', threshold: 0 },
+    );
+    sectionPairs.forEach(({ section }) => observer.observe(section));
+    window.addEventListener('scroll', () => {
+      if (window.scrollY < 160) navLinks.forEach((l) => l.classList.remove('is-active'));
+    }, { passive: true });
+  }
+</script>

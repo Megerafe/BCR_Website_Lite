@@ -1,0 +1,104 @@
+---
+/** Service packages + "build your own" row. Horizontally scrollable on mobile, 3-column grid on desktop. Clicking a package scrolls to #yhteys and pre-selects it in the form. Data: packages.yaml and home.yaml → packages */
+import { getOrdered } from '../lib/content';
+import Icon from './Icon.astro';
+
+interface Props {
+  customTitle: string;
+  customText: string;
+  customCta: { label: string; href: string };
+}
+const { customTitle, customText, customCta } = Astro.props;
+const packages = await getOrdered('packages');
+---
+
+<div data-mobile-scroller data-reveal>
+  <div
+    class="scroller flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-gutter px-gutter pb-2 sm:gap-4 md:grid md:grid-cols-3 md:overflow-visible md:pb-0 lg:gap-5"
+    data-track
+    aria-label="Paketit"
+  >
+    {
+      packages.map((p) => (
+        <article
+          class:list={[
+            'panel flex w-[84%] shrink-0 snap-start flex-col p-6 sm:w-[64%] md:w-auto md:shrink lg:p-8',
+            p.data.featured ? 'bg-blush' : 'bg-tan-50',
+          ]}
+          aria-labelledby={`paketti-${p.id}`}
+        >
+          <div class="flex items-start justify-between gap-3">
+            <h3 id={`paketti-${p.id}`} class:list={['display-bold text-word', p.data.featured && '!text-rose-deep']}>
+              {p.data.name}
+            </h3>
+            {p.data.badge && <span class="label rounded-full bg-butter px-3 py-1.5 !text-[0.6875rem] text-ink">{p.data.badge}</span>}
+          </div>
+          <p class="label mt-4 text-ink md:min-h-[2lh] lg:min-h-0">{p.data.subtitle}</p>
+          <p class="mt-3 text-sm leading-relaxed md:min-h-[3lh]">{p.data.description}</p>
+          <ul class="mt-6 border-t border-cocoa/15 text-sm">
+            {p.data.includes.map((item) => (
+              <li class="flex gap-3 border-b border-cocoa/15 py-3">
+                <Icon name="plus" class="mt-0.5 size-4 shrink-0 text-rose-deep" strokeWidth={1.75} />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-auto flex items-end justify-between gap-4 pt-8">
+            <p class="text-sm">
+              <span class="label block text-rose-deep">Hinta</span>
+              <span class="mt-1 block font-medium text-ink">{p.data.price || 'Tarjouksen mukaan'}</span>
+            </p>
+            <a
+              href="#yhteys"
+              data-select-package={p.id}
+              class="btn btn-primary btn-sm"
+              aria-label={`Valitse paketti ${p.data.name}`}
+            >
+              Valitse
+            </a>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+
+  <!-- Mobile-only progress indicator -->
+  <div class="mt-4 px-gutter md:hidden" aria-hidden="true">
+    <div class="h-px w-full bg-cocoa/10">
+      <div class="h-px w-1/3 bg-cocoa transition-[width] duration-300" data-progress></div>
+    </div>
+  </div>
+</div>
+
+<div class="px-gutter">
+  <div
+    class="panel mt-4 flex flex-col gap-5 border border-cocoa/10 p-6 md:mt-4 md:flex-row md:items-center md:justify-between lg:mt-5 lg:p-8"
+    data-reveal
+  >
+    <div>
+      <h3 class="display-bold text-title">{customTitle}</h3>
+      <p class="mt-2 max-w-xl text-sm text-cocoa/90">{customText}</p>
+    </div>
+    <a href={customCta.href} data-select-package="oma" class="btn btn-outline shrink-0 self-start md:self-auto">
+      {customCta.label}
+    </a>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-mobile-scroller]').forEach((root) => {
+    const track = root.querySelector<HTMLElement>('[data-track]');
+    const bar = root.querySelector<HTMLElement>('[data-progress]');
+    if (!track || !bar) return;
+    const update = () => {
+      if (track.scrollWidth <= track.clientWidth) {
+        bar.style.width = '100%';
+        return;
+      }
+      bar.style.width = `${Math.max(18, ((track.scrollLeft + track.clientWidth) / track.scrollWidth) * 100)}%`;
+    };
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  });
+</script>

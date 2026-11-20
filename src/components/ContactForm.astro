@@ -1,0 +1,402 @@
+---
+/**
+ * Contact form → Formspree (form ID in site.yaml → formspreeId).
+ * Services come from services.yaml and packages from packages.yaml, so the
+ * checkboxes update automatically when you add or rename something there.
+ *
+ * Pre-selection works both from in-page clicks (data-select-package / data-select-service)
+ * and from URL parameters, e.g. /?paketti=glow  /?palvelu=ugc
+ */
+import { getOrdered } from '../lib/content';
+import { getEntry } from 'astro:content';
+import Icon from './Icon.astro';
+
+const site = (await getEntry('site', 'main'))!.data;
+const services = await getOrdered('services');
+const packages = await getOrdered('packages');
+const action = `https://formspree.io/f/${site.formspreeId}`;
+
+const packageOptions = [
+  ...packages.map((p) => ({ id: p.id, label: p.data.name })),
+  { id: 'oma', label: 'Oma kokonaisuus' },
+  { id: 'en-tieda', label: 'En tiedä vielä' },
+];
+---
+
+<div class="contact-form-wrap" data-form-wrap>
+  <form action={action} method="POST" class="contact-form" novalidate data-contact-form>
+    <input type="hidden" name="_subject" value={`Uusi yhteydenotto – ${site.name}`} />
+    <div class="hp" aria-hidden="true">
+      <label>Älä täytä tätä kenttää <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+    </div>
+
+    <div class="grid gap-x-4 gap-y-5 sm:grid-cols-2">
+      <div class="field">
+        <label for="f-nimi">Nimi <span aria-hidden="true">*</span></label>
+        <input id="f-nimi" name="nimi" type="text" autocomplete="name" required aria-describedby="e-nimi" />
+        <p id="e-nimi" class="field-error" data-error-for="nimi"></p>
+      </div>
+      <div class="field">
+        <label for="f-yritys">Yritys tai hoitola <span aria-hidden="true">*</span></label>
+        <input id="f-yritys" name="yritys" type="text" autocomplete="organization" required aria-describedby="e-yritys" />
+        <p id="e-yritys" class="field-error" data-error-for="yritys"></p>
+      </div>
+      <div class="field">
+        <label for="f-email">Sähköposti <span aria-hidden="true">*</span></label>
+        <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="e-email" />
+        <p id="e-email" class="field-error" data-error-for="email"></p>
+      </div>
+      <div class="field">
+        <label for="f-puhelin">Puhelin <span class="optional">(valinnainen)</span></label>
+        <input id="f-puhelin" name="puhelin" type="tel" autocomplete="tel" inputmode="tel" />
+      </div>
+      <div class="field sm:col-span-2">
+        <label for="f-some">Instagram tai verkkosivu <span class="optional">(valinnainen)</span></label>
+        <input id="f-some" name="instagram" type="text" placeholder="@yrityksesi" />
+      </div>
+    </div>
+
+    <fieldset class="mt-8">
+      <legend class="form-legend">Mistä palveluista olet kiinnostunut?</legend>
+      <div class="mt-3 flex flex-wrap gap-2">
+        {
+          services.map((s) => (
+            <label class="choice">
+              <input type="checkbox" name="palvelut" value={s.data.title} data-id={s.id} class="sr-only" />
+              <Icon name="check" class="choice-check size-3.5" strokeWidth={2.25} />
+              <span>{s.data.title}</span>
+            </label>
+          ))
+        }
+      </div>
+    </fieldset>
+
+    <fieldset class="mt-8">
+      <legend class="form-legend">Kiinnostaako jokin paketti?</legend>
+      <div class="mt-3 flex flex-wrap gap-2">
+        {
+          packageOptions.map((p) => (
+            <label class="choice">
+              <input type="radio" name="paketti" value={p.label} data-id={p.id} class="sr-only" />
+              <Icon name="check" class="choice-check size-3.5" strokeWidth={2.25} />
+              <span>{p.label}</span>
+            </label>
+          ))
+        }
+      </div>
+    </fieldset>
+
+    <div class="field mt-8">
+      <label for="f-viesti">Viesti <span aria-hidden="true">*</span></label>
+      <textarea
+        id="f-viesti"
+        name="viesti"
+        rows="6"
+        required
+        aria-describedby="e-viesti"
+        placeholder="Kerro lyhyesti yrityksestäsi, tavoitteistasi ja toivotusta aikataulusta."></textarea>
+      <p id="e-viesti" class="field-error" data-error-for="viesti"></p>
+    </div>
+
+    <div class="mt-6">
+      <label class="consent">
+        <input type="checkbox" name="suostumus" value="Kyllä" required aria-describedby="e-suostumus" />
+        <span>
+          Hyväksyn, että tietojani käytetään yhteydenottooni vastaamiseen.{' '}
+          <button type="button" class="text-link cursor-pointer text-left" data-privacy-open>Tietosuojaseloste</button>
+        </span>
+      </label>
+      <p id="e-suostumus" class="field-error" data-error-for="suostumus"></p>
+    </div>
+
+    <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+      <button type="submit" class="btn btn-primary cursor-pointer" data-submit>
+        <span data-submit-label>Lähetä viesti</span>
+        <Icon name="arrow-right" class="size-4" />
+      </button>
+      <p class="text-xs text-cocoa/80">* pakollinen kenttä</p>
+    </div>
+    <p class="form-status mt-4 text-sm" role="alert" data-status></p>
+  </form>
+
+  <div class="form-success" hidden tabindex="-1" data-success>
+    <p class="eyebrow">Viesti lähetetty</p>
+    <h3 class="display-thin mt-4 text-display">kiitos viestistäsi</h3>
+    <p class="mt-5 max-w-md text-ink">Palaan sinulle mahdollisimman pian, yleensä 1–2 arkipäivän sisällä.</p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <button type="button" class="btn btn-outline cursor-pointer" data-form-reset>Lähetä uusi viesti</button>
+      <a href="#top" class="btn btn-primary">Takaisin ylös</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .field label,
+  .form-legend {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+  }
+  .optional {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: rgb(91 70 60 / 0.75);
+  }
+  .field input,
+  .field textarea {
+    margin-top: 0.5rem;
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid rgb(91 70 60 / 0.18);
+    background: #fff;
+    padding: 0.8rem 1rem;
+    font: inherit;
+    color: var(--color-ink);
+    transition:
+      border-color 0.25s,
+      box-shadow 0.25s;
+  }
+  .field input {
+    min-height: 3rem;
+  }
+  .field textarea {
+    resize: vertical;
+    min-height: 9rem;
+  }
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: rgb(91 70 60 / 0.5);
+  }
+  .field input:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--color-rose-deep);
+    box-shadow: 0 0 0 3px rgb(122 92 77 / 0.15);
+  }
+  .field [aria-invalid='true'] {
+    border-color: #a3434b;
+  }
+  .field-error {
+    margin-top: 0.4rem;
+    font-size: 0.8125rem;
+    color: #a3434b;
+  }
+  .field-error:empty {
+    display: none;
+  }
+
+  .choice {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 1.05rem;
+    border-radius: 999px;
+    border: 1px solid rgb(91 70 60 / 0.22);
+    background: #fff;
+    font-size: 0.9rem;
+    color: var(--color-cocoa);
+    cursor: pointer;
+    transition:
+      background-color 0.25s,
+      border-color 0.25s,
+      color 0.25s,
+      box-shadow 0.4s var(--ease-soft);
+  }
+  .choice:hover {
+    border-color: var(--color-cocoa);
+  }
+  .choice :global(.choice-check) {
+    display: none;
+  }
+  .choice:has(input:checked) {
+    background: var(--color-cocoa);
+    border-color: var(--color-cocoa);
+    color: #fff;
+  }
+  .choice:has(input:checked) :global(.choice-check) {
+    display: block;
+  }
+  .choice:has(input:focus-visible) {
+    outline: 2px solid var(--color-rose-deep);
+    outline-offset: 3px;
+  }
+  .choice.is-highlighted {
+    box-shadow: 0 0 0 4px rgb(246 209 209 / 0.95);
+  }
+
+  .consent {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    font-size: 0.9rem;
+    color: var(--color-ink);
+    cursor: pointer;
+  }
+  .consent input {
+    margin-top: 0.2rem;
+    width: 1.15rem;
+    height: 1.15rem;
+    flex-shrink: 0;
+    accent-color: var(--color-rose-deep);
+  }
+  .form-status:empty {
+    display: none;
+  }
+  .form-status {
+    color: #a3434b;
+  }
+  .form-success:focus {
+    outline: none;
+  }
+  [data-submit][disabled] {
+    opacity: 0.7;
+    cursor: progress;
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const success = document.querySelector<HTMLElement>('[data-success]');
+  const resetBtn = document.querySelector<HTMLButtonElement>('[data-form-reset]');
+
+  if (form && success) {
+    const status = form.querySelector<HTMLElement>('[data-status]')!;
+    const submit = form.querySelector<HTMLButtonElement>('[data-submit]')!;
+    const submitLabel = form.querySelector<HTMLElement>('[data-submit-label]')!;
+
+    const pulseChoice = (input: HTMLInputElement) => {
+      const label = input.closest<HTMLElement>('.choice');
+      if (!label) return;
+      label.classList.remove('is-highlighted');
+      void label.offsetWidth;
+      label.classList.add('is-highlighted');
+      window.setTimeout(() => label.classList.remove('is-highlighted'), 1200);
+    };
+
+    const showForm = () => {
+      if (!form.hidden) return;
+      form.reset();
+      form.hidden = false;
+      success.hidden = true;
+    };
+
+    const selectPackage = (id: string) => {
+      showForm();
+      const radio = form.querySelector<HTMLInputElement>(`input[name="paketti"][data-id="${CSS.escape(id)}"]`);
+      if (radio) {
+        radio.checked = true;
+        pulseChoice(radio);
+      }
+    };
+
+    const selectService = (id: string) => {
+      showForm();
+      const box = form.querySelector<HTMLInputElement>(`input[name="palvelut"][data-id="${CSS.escape(id)}"]`);
+      if (box) {
+        box.checked = true;
+        pulseChoice(box);
+      }
+    };
+
+    /* Pre-select from URL query parameters, e.g. /?paketti=glow or /?palvelu=ugc */
+    const params = new URLSearchParams(location.search);
+    const pkg = params.get('paketti');
+    const svc = params.getAll('palvelu');
+    if (pkg) selectPackage(pkg);
+    svc.forEach((id) => selectService(id));
+    if (pkg || svc.length) {
+      document.getElementById('yhteys')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    /* Pre-select dynamically from in-page service cards, package buttons, or footer links */
+    document.addEventListener('click', (e) => {
+      const target = (e.target as HTMLElement | null)?.closest<HTMLElement>('[data-select-package], [data-select-service]');
+      if (!target) return;
+      if (target.dataset.selectPackage) selectPackage(target.dataset.selectPackage);
+      if (target.dataset.selectService) selectService(target.dataset.selectService);
+    });
+
+    resetBtn?.addEventListener('click', () => {
+      form.reset();
+      form.hidden = false;
+      success.hidden = true;
+      (form.elements.namedItem('nimi') as HTMLInputElement | null)?.focus();
+    });
+
+    const messages: Record<string, string> = {
+      nimi: 'Kirjoita nimesi.',
+      yritys: 'Kirjoita yrityksesi tai hoitolasi nimi.',
+      email: 'Kirjoita sähköpostiosoite muodossa nimi@esimerkki.fi.',
+      viesti: 'Kirjoita lyhyt viesti.',
+      suostumus: 'Hyväksy tietojen käyttö, jotta voin vastata sinulle.',
+    };
+
+    const setError = (name: string, msg: string) => {
+      const input = form.elements.namedItem(name) as HTMLInputElement | null;
+      const el = form.querySelector<HTMLElement>(`[data-error-for="${name}"]`);
+      if (input) input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      if (el) el.textContent = msg;
+    };
+
+    const validate = () => {
+      let firstInvalid: HTMLElement | null = null;
+      for (const name of Object.keys(messages)) {
+        const input = form.elements.namedItem(name) as HTMLInputElement;
+        let ok = input.type === 'checkbox' ? input.checked : input.value.trim().length > 0;
+        if (ok && name === 'email') ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(input.value.trim());
+        setError(name, ok ? '' : messages[name]);
+        if (!ok && !firstInvalid) firstInvalid = input;
+      }
+      firstInvalid?.focus();
+      return !firstInvalid;
+    };
+
+    // Clear an error as soon as the field is fixed
+    form.addEventListener('input', (e) => {
+      const t = e.target as HTMLInputElement;
+      if (t.getAttribute('aria-invalid') === 'true') setError(t.name, '');
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = '';
+      if (!validate()) return;
+
+      const data = new FormData(form);
+      const chosen = data.getAll('palvelut');
+      data.delete('palvelut');
+      data.set('palvelut', chosen.length ? chosen.join(', ') : '–');
+      if (!data.get('paketti')) data.set('paketti', '–');
+
+      submit.disabled = true;
+      submitLabel.textContent = 'Lähetetään…';
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error(String(res.status));
+        form.hidden = true;
+        success.hidden = false;
+        success.focus();
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch {
+        status.textContent =
+          'Viestin lähetys ei onnistunut. Yritä hetken päästä uudelleen tai lähetä sähköpostia – pahoittelen häiriötä.';
+      } finally {
+        submit.disabled = false;
+        submitLabel.textContent = 'Lähetä viesti';
+      }
+    });
+  }
+</script>

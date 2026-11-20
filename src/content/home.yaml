@@ -1,0 +1,113 @@
+# ════════════════════════════════════════════════════════════════
+#  ETUSIVU · one-page homepage texts and images
+#  Sections appear on the page in the same order as below,
+#  followed by the full Ota yhteyttä contact section & FAQ.
+#  Images live in src/assets/images/ – replace a file with your own
+#  photo using the SAME file name, or change the path here.
+# ════════════════════════════════════════════════════════════════
+
+seo:
+  title: BeautyContentRoom – some ja markkinointi kauneusalan yrityksille
+  description: >-
+    Esteettistä some-sisältöä, UGC-videoita, brändäystä ja yhtenäinen
+    visuaalinen ilme kauneushoitoloille, kynsi- ja ripsistudioille ja kampaamoille.
+
+# 1 · Hero – the first thing visitors see
+hero:
+  eyebrow: Some- ja markkinointistudio kauneusalalle
+  title: social media and marketing for beauty businesses
+  text: >-
+    Suunnittelen ja tuotan kauneusalan yrityksille sisältöä, joka näyttää yhtä
+    hyvältä kuin palvelusi tuntuvat – ja teen somestasi yhtenäisen,
+    tunnistettavan ja helposti lähestyttävän.
+  primary:
+    label: Tutustu palveluihin
+    href: "#palvelut"
+  secondary:
+    label: Ota yhteyttä
+    href: "#yhteys"
+  image: ../assets/images/hero/hero-hands.jpg
+  imageAlt: Käsi, jossa vaaleanpunaiset geelikynnet, kuvaa sisältöä puhelimella
+  secondImage: ../assets/images/hero/hero-studio.jpg
+  secondImageAlt: Vaaleanpunainen ihonhoitopullo valkoisella jalustalla, taustalla puhelin kuvausjalustalla
+
+# 2 · Short brand statement on a wide image
+intro:
+  title: kaunis some ei ole sattumaa
+  text: >-
+    BeautyContentRoom auttaa kauneushoitoloita, kynsi- ja ripsistudioita,
+    kampaamoita ja ihonhoidon ammattilaisia kasvamaan somessa. Suunnittelen
+    sisällön, ilmeen ja kanavat niin, että ne puhuvat samaa kieltä – sinun
+    brändisi kieltä.
+  cta:
+    label: Lue lisää minusta
+    href: "#tietoa"
+  image: ../assets/images/pages/intro-wide.jpg
+
+# 3 · Service cards (the cards themselves come from services.yaml)
+services:
+  title: palvelut
+  text: Valitse yksittäinen palvelu tai kokonainen paketti. Jokainen hinta räätälöidään tarpeesi mukaan.
+  cta:
+    label: Pyydä tarjous
+    href: "#yhteys"
+
+# 4 · Two-part panel: text + image
+split:
+  eyebrow: Some-ilmeen yhtenäistäminen
+  title: yksi ilme. joka kanavassa.
+  text: >-
+    Kun Instagram, TikTok, verkkosivut ja hinnasto näyttävät samalta, asiakas
+    tunnistaa sinut heti. Kokoan värit, fontit, kuvatyylin ja äänensävyn yhdeksi
+    selkeäksi kokonaisuudeksi.
+  cta:
+    label: Katso esimerkit
+    href: "#portfolio"
+  image: ../assets/images/pages/brand-world.jpg
+  imageAlt: Vaaleanpunainen brändimaailma – puhelin, käyntikortti, kangaskassi ja seerumipullo
+
+# 5 · Packages (the package cards come from packages.yaml)
+packages:
+  title: paketit
+  text: Valmiit kokonaisuudet helpottavat valintaa. Hinnat tarjouksen mukaan – valitse paketti, niin palaan sinulle.
+  customTitle: Kokoa oma paketti
+  customText: Etkö löydä sopivaa? Valitse lomakkeella juuri ne palvelut, joita tarvitset.
+  customCta:
+    label: Kokoa oma
+    href: "#yhteys"
+
+# 6 · Portfolio preview (the images come from portfolio.yaml – items with featured: true)
+portfolio:
+  title: portfolio
+  text: Kurkista, millaista sisältöä ja ilmettä teen kauneusalan yrityksille.
+  cta:
+    label: Ota yhteyttä
+    href: "#yhteys"
+
+# 7 · Process steps
+process:
+  title: näin edetään
+  text: Selkeä prosessi, jossa tiedät aina, mitä seuraavaksi tapahtuu.
+  steps:
+    - title: Tutustuminen
+      text: Kuulen yrityksestäsi, asiakkaistasi ja tavoitteistasi. Käydään läpi nykyinen some ja ilme.
+    - title: Suunta
+      text: Kokoan tunnelmataulun ja suunnitelman, jonka hyväksyt ennen kuin mitään tuotetaan.
+    - title: Tuotanto
+      text: Kuvaan, editoin ja suunnittelen materiaalit sovitun aikataulun mukaan.
+    - title: Viimeistely
+      text: Hiotaan yhdessä yksityiskohdat, ja saat valmiit tiedostot ja ohjeet käyttöön.
+
+# 8 · About teaser
+about:
+  eyebrow: BeautyContentRoomin takana
+  title: hei, olen meeri
+  text: >-
+    Rakastan kauneusalaa ja kaikkea visuaalista. Autan yrittäjiä näyttämään
+    somessa yhtä ammattimaisilta ja kauniilta kuin he oikeasti ovat – ilman,
+    että heidän tarvitsee käyttää iltojaan julkaisujen miettimiseen.
+  cta:
+    label: Ota yhteyttä
+    href: "#yhteys"
+  image: ../assets/images/pages/about-bts.jpg
+  imageAlt: Kädet asettelevat ihonhoitotuotetta ja pioneja kuvausta varten

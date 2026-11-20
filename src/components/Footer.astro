@@ -1,0 +1,120 @@
+---
+/** Footer with smooth anchor links, service quick-select links, contact details and the large wordmark. */
+import { getOrdered } from '../lib/content';
+import Logo from './Logo.astro';
+
+interface Props {
+  site: {
+    name: string;
+    description: string;
+    location?: string;
+    serviceArea?: string;
+    email?: string;
+    phone?: string;
+    businessId?: string;
+    nav: { label: string; href: string }[];
+    instagram?: { handle?: string; url?: string };
+    tiktok?: { handle?: string; url?: string };
+  };
+}
+const { site } = Astro.props;
+const services = await getOrdered('services');
+const year = new Date().getFullYear();
+const isHome = Astro.url.pathname === '/';
+const resolveHref = (href: string) => (!isHome && href.startsWith('#') ? `/${href}` : href);
+---
+
+<footer class="px-gutter pb-gutter pt-[var(--spacing-section)]">
+  <div class="grid gap-10 border-t border-cocoa/10 pt-12 md:grid-cols-12">
+    <div class="md:col-span-4">
+      <a href={isHome ? '#top' : '/'} class="inline-block text-rose" aria-label={`${site.name} – alkuun`}>
+        <Logo class="h-9 w-auto" title={site.name} />
+      </a>
+      <p class="mt-5 max-w-xs text-sm leading-relaxed text-cocoa/85">{site.description}</p>
+    </div>
+
+    <nav aria-label="Alavalikko" class="md:col-span-2">
+      <h2 class="label text-rose-deep">Osioihin</h2>
+      <ul class="mt-4 space-y-2 text-sm">
+        <li><a href={isHome ? '#top' : '/'} class="hover:text-rose-deep">Alkuun</a></li>
+        {
+          site.nav.map((item) => (
+            <li>
+              <a href={resolveHref(item.href)} class="capitalize hover:text-rose-deep">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li><a href={resolveHref('#ukk')} class="hover:text-rose-deep">Usein kysyttyä</a></li>
+      </ul>
+    </nav>
+
+    <div class="md:col-span-3">
+      <h2 class="label text-rose-deep">Palvelut</h2>
+      <ul class="mt-4 space-y-2 text-sm">
+        {
+          services.map((s) => (
+            <li>
+              <a
+                href={isHome ? '#yhteys' : `/?palvelu=${s.id}#yhteys`}
+                data-select-service={isHome ? s.id : undefined}
+                class="hover:text-rose-deep"
+              >
+                {s.data.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="md:col-span-3">
+      <h2 class="label text-rose-deep">Yhteys</h2>
+      <ul class="mt-4 space-y-2 text-sm">
+        {site.email && <li><a href={`mailto:${site.email}`} class="text-link">{site.email}</a></li>}
+        {site.phone && <li><a href={`tel:${site.phone.replace(/\s/g, '')}`} class="hover:text-rose-deep">{site.phone}</a></li>}
+        {
+          site.instagram?.url && (
+            <li>
+              <a href={site.instagram.url} target="_blank" rel="noopener noreferrer" class="hover:text-rose-deep">
+                Instagram {site.instagram.handle}
+              </a>
+            </li>
+          )
+        }
+        {
+          site.tiktok?.url && (
+            <li>
+              <a href={site.tiktok.url} target="_blank" rel="noopener noreferrer" class="hover:text-rose-deep">
+                TikTok {site.tiktok.handle}
+              </a>
+            </li>
+          )
+        }
+        {site.location && <li class="text-cocoa/85">{site.location}</li>}
+      </ul>
+    </div>
+  </div>
+
+  <p class="footer-wordmark display-thin mt-16 select-none text-center text-rose" aria-hidden="true">
+    {site.name}
+  </p>
+
+  <div class="mt-6 flex flex-col gap-2 border-t border-cocoa/10 pt-5 text-xs text-cocoa/80 sm:flex-row sm:items-center sm:justify-between">
+    <p>{`© ${year} ${site.name}${site.businessId ? ` · Y-tunnus ${site.businessId}` : ''}`}</p>
+    <p>
+      <button type="button" class="text-link cursor-pointer" data-privacy-open>Tietosuojaseloste</button>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer-wordmark {
+    font-size: clamp(2.5rem, 10.9vw, 14rem);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    color: var(--color-rose);
+  }
+</style>

@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Sivua ei löytynyt – BeautyContentRoom" description="Etsimääsi sivua ei löytynyt." noindex>
+  <section class="px-gutter pt-1">
+    <div class="panel flex min-h-[60vh] flex-col items-center justify-center bg-blush-50 px-6 py-24 text-center">
+      <p class="eyebrow">Virhe 404</p>
+      <h1 class="display-thin mt-4 text-hero">hups, sivua ei löytynyt</h1>
+      <p class="mt-6 max-w-md text-ink">Sivu on ehkä siirtynyt tai linkissä on kirjoitusvirhe.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="/" class="btn btn-primary">Etusivulle</a>
+        <a href="/#yhteys" class="btn btn-outline">Ota yhteyttä</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

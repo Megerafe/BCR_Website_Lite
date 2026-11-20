@@ -1,0 +1,102 @@
+---
+/**
+ * The shell around the page: <head>, announcement strip, sticky header, footer and privacy modal.
+ */
+import '../styles/global.css';
+import { getEntry } from 'astro:content';
+import AnnouncementBar from '../components/AnnouncementBar.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PrivacyModal from '../components/PrivacyModal.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Social share image, relative to /public */
+  image?: string;
+  noindex?: boolean;
+}
+
+const { title, description, image = '/og-image.jpg', noindex = false } = Astro.props;
+const site = (await getEntry('site', 'main'))!.data;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: site.name,
+  description: site.description,
+  url: Astro.site?.toString(),
+  image: ogImage.toString(),
+  areaServed: site.serviceArea || site.location || undefined,
+  address: site.location ? { '@type': 'PostalAddress', addressLocality: site.location, addressCountry: 'FI' } : undefined,
+  email: site.email || undefined,
+  sameAs: [site.instagram?.url, site.tiktok?.url].filter(Boolean),
+};
+---
+
+<!doctype html>
+<html lang="fi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <link rel="preload" href="/fonts/switzer-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/yellow-peas-regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/yellow-peas-bold.woff2" as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fi_FI" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body id="top" class="min-h-dvh">
+    <a href="#main" class="skip-link">Siirry sisältöön</a>
+    <AnnouncementBar items={site.announcement} />
+    <Header site={site} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer site={site} />
+    <PrivacyModal />
+
+    <script>
+      // Fade elements in as they scroll into view (see [data-reveal] in global.css)
+      const els = document.querySelectorAll('[data-reveal]');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
+        );
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('is-visible'));
+      }
+    </script>
+  </body>
+</html>

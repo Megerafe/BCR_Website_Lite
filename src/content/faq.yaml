@@ -1,0 +1,34 @@
+# ════════════════════════════════════════════════════════════════
+#  USEIN KYSYTTYÄ · frequently asked questions
+#  Shown on the services page and the contact page.
+# ════════════════════════════════════════════════════════════════
+
+- id: hinnat
+  question: Paljonko palvelut maksavat?
+  answer: >-
+    Hinnoittelen jokaisen projektin sen laajuuden mukaan. Kerro lomakkeella,
+    mitä tarvitset, niin lähetän sinulle selkeän tarjouksen ilman sitoumuksia.
+
+- id: yksi-palvelu
+  question: Voinko tilata vain yhden palvelun?
+  answer: >-
+    Totta kai. Voit valita yksittäisen palvelun, valmiin paketin tai koota
+    oman kokonaisuuden juuri niistä palveluista, joita tarvitset.
+
+- id: kuvaukset
+  question: Missä kuvaukset tehdään?
+  answer: >-
+    Yleensä hoitolassasi tai studiollasi, jotta sisältö näyttää aidosti sinulta.
+    Paikka ja aikataulu sovitaan aina etukäteen.
+
+- id: aikataulu
+  question: Kuinka nopeasti saan valmiit materiaalit?
+  answer: >-
+    Aikataulu riippuu palvelusta, ja se sovitaan ennen aloitusta. Saat aina
+    tiedon siitä, milloin mikäkin osa on valmis.
+
+- id: osaaminen
+  question: Pitääkö minun osata somea?
+  answer: >-
+    Ei tarvitse. Saat valmiit materiaalit ja selkeät ohjeet, ja autan
+    mielelläni myös julkaisemisessa.

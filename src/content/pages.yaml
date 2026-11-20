@@ -1,0 +1,50 @@
+# ════════════════════════════════════════════════════════════════
+#  YHTEYDENOTTO & TIETOSUOJA · contact section & privacy notice texts
+# ════════════════════════════════════════════════════════════════
+
+- id: yhteys
+  eyebrow: Yhteystiedot
+  title: ota yhteyttä
+  intro: >-
+    Kerro yrityksestäsi ja siitä, mitä tarvitset. Palaan sinulle
+    mahdollisimman pian, ja suunnitellaan yhdessä seuraavat askeleet.
+  formTitle: kerro, mitä tarvitset
+  formIntro: Vastaan kaikkiin viesteihin henkilökohtaisesti. Tarjouspyyntö ei sido sinua mihinkään.
+
+- id: tietosuoja
+  eyebrow: Tietosuoja
+  title: tietosuojaseloste
+  intro: >-
+    Tämä seloste kertoo, miten käsittelen tietoja, jotka lähetät
+    yhteydenottolomakkeella. ⚠ Tarkista ja täydennä tiedot ennen julkaisua.
+  body:
+    - heading: Rekisterinpitäjä
+      text: >-
+        BeautyContentRoom, Y-tunnus [lisää Y-tunnus], [lisää osoite].
+        Yhteyshenkilö: Meeri, hei@beautycontentroom.fi.
+    - heading: Mitä tietoja kerätään
+      text: >-
+        Yhteydenottolomakkeella lähettämäsi tiedot: nimi, yrityksen nimi,
+        sähköpostiosoite, puhelinnumero ja Instagram-tunnus (jos annoit ne),
+        valitsemasi palvelut sekä viestisi sisältö.
+    - heading: Käyttötarkoitus ja oikeusperuste
+      text: >-
+        Tietoja käytetään ainoastaan yhteydenottoosi vastaamiseen, tarjouksen
+        laatimiseen ja mahdollisen asiakassuhteen hoitamiseen. Käsittely
+        perustuu suostumukseesi ja sopimusta edeltäviin toimenpiteisiin.
+    - heading: Tietojen käsittelijät
+      text: >-
+        Lomakkeen viestit välitetään Formspree-palvelun kautta (Formspree Inc.,
+        Yhdysvallat), joka toimii henkilötietojen käsittelijänä. Tietojen siirrossa
+        noudatetaan EU:n tietosuoja-asetuksen mukaisia suojatoimia.
+    - heading: Säilytysaika
+      text: >-
+        Yhteydenottoja säilytetään niin kauan kuin se on tarpeen yhteydenottoon
+        vastaamiseksi tai asiakassuhteen hoitamiseksi, ja ne poistetaan, kun
+        niitä ei enää tarvita.
+    - heading: Sinun oikeutesi
+      text: >-
+        Sinulla on oikeus tarkastaa tietosi, pyytää niiden oikaisua tai
+        poistamista sekä peruuttaa suostumuksesi. Voit myös tehdä valituksen
+        tietosuojavaltuutetun toimistolle. Ota yhteyttä sähköpostitse, niin
+        hoidan asian.

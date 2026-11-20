@@ -1,0 +1,44 @@
+---
+/** The pale pill at the very top with slowly scrolling messages. Text comes from site.yaml → announcement. */
+interface Props {
+  items: string[];
+}
+const { items } = Astro.props;
+// Repeat the messages so the strip is always wider than the screen, then double it for a seamless loop.
+const base = items.length ? Array.from({ length: Math.max(2, Math.ceil(6 / items.length)) }, () => items).flat() : [];
+---
+
+{
+  items.length > 0 && (
+    <div class="px-gutter pt-gutter">
+      <div class="announcement panel relative flex h-9 items-center bg-blush-50 text-rose-deep" role="region" aria-label="Tiedote">
+        <p class="sr-only">{items.join('. ')}</p>
+        <div class="announcement-track flex w-max shrink-0" aria-hidden="true">
+          {[0, 1].map(() => (
+            <ul class="flex shrink-0 items-center">
+              {base.map((text) => (
+                <li class="label flex items-center gap-6 px-6 !text-[0.75rem]">
+                  <span>{text}</span>
+                  <span class="inline-block size-1 rounded-full bg-rose/60" />
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+<style>
+  .announcement {
+    border-radius: 0.75rem;
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+  .announcement-track {
+    animation: marquee 60s linear infinite;
+  }
+  .announcement:hover .announcement-track {
+    animation-play-state: paused;
+  }
+</style>

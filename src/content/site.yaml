@@ -1,0 +1,57 @@
+# ════════════════════════════════════════════════════════════════
+#  SIVUSTON PERUSTIEDOT · site-wide settings
+#  These appear in the header, footer, contact section and search results.
+#
+#  How to edit: change the text after the colon (:).
+#  If a text contains a colon or a # character, wrap it in "quotes".
+#  Lines starting with # are comments and are not shown on the site.
+# ════════════════════════════════════════════════════════════════
+
+name: BeautyContentRoom
+tagline: Social media and marketing for beauty businesses
+description: >-
+  BeautyContentRoom suunnittelee ja tuottaa esteettistä some-sisältöä,
+  UGC-videoita ja yhtenäisen visuaalisen ilmeen kauneusalan yrityksille.
+
+founder: Meeri # TODO: check spelling / add surname if wanted
+location: Helsinki
+serviceArea: Pääkaupunkiseutu ja etätyönä koko Suomi # TODO: check
+
+# Contact details. Leave a field empty ("") to hide it from the site.
+email: hei@beautycontentroom.fi # TODO: replace with the real address
+phone: ""
+businessId: "" # Y-tunnus – shown in the footer once added
+
+instagram:
+  handle: "@beautycontentroom" # TODO: check the real handle
+  url: https://www.instagram.com/beautycontentroom/
+tiktok:
+  handle: ""
+  url: ""
+
+# Formspree form ID (the last part of https://formspree.io/f/xljdyznw)
+formspreeId: xljdyznw
+
+# The slowly scrolling strip at the very top of the page
+announcement:
+  - sisältöä, joka näyttää sinun brändiltäsi
+  - ugc-videot · sisällöntuotanto · brändäys
+  - hinnat tarjouksen mukaan – kysy rohkeasti
+
+# Main navigation (header) – links scroll smoothly to sections on the page
+nav:
+  - label: palvelut
+    href: "#palvelut"
+  - label: paketit
+    href: "#paketit"
+  - label: portfolio
+    href: "#portfolio"
+  - label: tietoa
+    href: "#tietoa"
+  - label: yhteys
+    href: "#yhteys"
+
+# The button in the top-right corner
+cta:
+  label: Ota yhteyttä
+  href: "#yhteys"

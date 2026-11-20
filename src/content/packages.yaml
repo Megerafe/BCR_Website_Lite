@@ -1,0 +1,50 @@
+# ════════════════════════════════════════════════════════════════
+#  PAKETIT · service packages
+#  Visitors can pick a package – the contact form then opens with
+#  that package already selected.
+#
+#  id        – short unique name used in links (no spaces / ä / ö)
+#  name      – the big package name
+#  price     – e.g. "alk. 490 €" or "490 € / kk". Leave "" to show "Hinta tarjouksen mukaan".
+#  badge     – small label in the corner, e.g. "Suosittelen". Leave "" for none.
+#  featured  – true = highlighted pink card (use on one package only)
+# ════════════════════════════════════════════════════════════════
+
+- id: start
+  name: start
+  subtitle: Uudelle tai uudistuvalle yritykselle
+  description: Selkeä pohja somelle – yhtenäinen ilme ja ensimmäiset sisällöt.
+  includes:
+    - Some-tilien yhtenäistäminen
+    - Kohokohtien kannet ja julkaisupohjat
+    - Yksi sisältökuvaus
+    - Ulkopuolinen näkökulma brändiin
+  price: ""
+  badge: ""
+  featured: false
+
+- id: glow
+  name: glow
+  subtitle: Säännöllistä sisältöä kuukausittain
+  description: Jatkuvaa, laadukasta sisältöä ilman, että sinun tarvitsee miettiä, mitä julkaiset.
+  includes:
+    - Kuukausittainen sisältösuunnitelma
+    - Kuvaus ja editointi
+    - UGC-videot Reelsiin ja TikTokiin
+    - Julkaisutekstien ehdotukset
+  price: ""
+  badge: Suosittelen
+  featured: true
+
+- id: signature
+  name: signature
+  subtitle: Koko brändi kerralla kuntoon
+  description: Logo, ilme, materiaalit ja sisältö – kaikki samasta kädestä.
+  includes:
+    - Brändäys ja logo
+    - Verkkosivu- ja somemateriaalit
+    - Some-tilien yhtenäistäminen
+    - Sisällöntuotanto ja UGC-videot
+  price: ""
+  badge: ""
+  featured: false
