@@ -1,13 +1,13 @@
 # ════════════════════════════════════════════════════════════════
 #  PALVELUT · services
 #  Each item starting with "- id:" is one service card.
-#  The cards appear in this order on the homepage and the services page.
+#  The cards appear in this order on the homepage and contact form.
 #
 #  id        – short unique name, no spaces or ä/ö (used in links)
 #  word      – the big word on the card (short, lowercase works best)
 #  title     – the service name
 #  short     – one sentence for the card
-#  description – longer text on the services page
+#  description – longer text describing the service
 #  includes  – bullet list "what you get"
 #  price     – e.g. "alk. 290 €". Leave "" to show "Pyydä tarjous".
 #  image     – card image (portrait images look best)
@@ -15,10 +15,10 @@
 
 - id: sisallontuotanto
   word: content
-  title: Sisällöntuotanto
+  title: Sisällöntuotanto kauneudenhoitoalan yrityksille
   short: Kuvat ja videot, jotka saavat palvelusi näyttämään yhtä hyviltä kuin ne ovat.
   description: >-
-    Suunnittelen ja kuvaan sisällön yrityksesi someen: tunnelmakuvat,
+    Suunnittelen ja kuvaan kauneudenhoitoalan yrityksille sisältöä someen: tunnelmakuvat,
     lähikuvat töistäsi, tuotekuvat ja lyhyet videot. Kaikki samalla
     visuaalisella otteella, jotta feedistä tulee yhtenäinen ja harkitun näköinen.
   includes:
@@ -27,25 +27,8 @@
     - Editoidut kuvat ja lyhyet videot
     - Tekstiehdotukset julkaisuihin
   price: ""
-  image: ../assets/images/services/content.jpg
+  image: ../assets/images/new_pics/content.PNG
   imageAlt: Vaaleanpunainen kosmetiikkapurkki, jota kuvataan puhelimella
-
-- id: ugc
-  word: ugc
-  title: UGC-videot
-  short: Aidon tuntuiset videot, joissa palvelusi ja tuotteesi pääsevät oikeasti esiin.
-  description: >-
-    UGC-tyylinen video tuntuu suositukselta eikä mainokselta. Teen
-    pystyvideot Reelsiin, TikTokiin ja mainoksiin – ideasta ja
-    käsikirjoituksesta valmiiseen editointiin.
-  includes:
-    - Ideointi ja käsikirjoitus
-    - Kuvaus ja editointi
-    - Tekstitykset ja musiikki
-    - Pystyformaatti Reelsiin ja TikTokiin
-  price: ""
-  image: ../assets/images/services/ugc.jpg
-  imageAlt: Kädet kuvaavat huulikiillon käyttöä puhelimella
 
 - id: some-ilme
   word: feed
@@ -61,11 +44,11 @@
     - Julkaisu- ja story-pohjat
     - Värit ja fontit someen
   price: ""
-  image: ../assets/images/services/feed.jpg
-  imageAlt: Yhdeksän vaaleanpunaista valokuvaa siistissä ruudukossa kuin some-feed
+  image: ../assets/images/new_pics/feed.PNG
+  imageAlt: Mintun kuvat instagram-feedissä
 
 - id: brandays
-  word: brand
+  word: brändi
   title: Brändäys
   short: Visuaalinen ilme ja tunnelma, joka erottaa sinut muista.
   description: >-
@@ -78,8 +61,8 @@
     - Kuvatyyli ja äänensävy
     - Tiivis brändiohje
   price: ""
-  image: ../assets/images/services/brand.jpg
-  imageAlt: Värimallit vaaleanpunaisen, beigen ja ruskean sävyissä
+  image: ../assets/images/new_pics/brändi.PNG
+  imageAlt: Brändin värit, typografia ja kuvatyyli esitettynä moodboardilla
 
 - id: logo
   word: logo
@@ -94,8 +77,8 @@
     - Värivaihtoehdot
     - Tiedostot verkkoon ja painoon
   price: ""
-  image: ../assets/images/services/logo.jpg
-  imageAlt: BCR-logo kohopainettuna vaaleanpunaiseen käyntikorttiin
+  image: ../assets/images/new_pics/logo.PNG
+  imageAlt: BCR-logo vaaleanpunaisena
 
 - id: materiaalit
   word: visuals
@@ -111,11 +94,11 @@
     - Kampanjagrafiikat
     - Muokattavat pohjat
   price: ""
-  image: ../assets/images/services/visuals.jpg
-  imageAlt: Kannettava tietokone ja puhelin vaaleanpunaisilla näkymillä valkoisella pöydällä
+  image: ../assets/images/new_pics/visuals.PNG
+  imageAlt: BCR-verkkosivu tietokoneen näytöllä, vieressä Hinnasto.
 
 - id: nakokulma
-  word: insight
+  word: näkökulma
   title: Ulkopuolinen näkökulma brändiin
   short: Rehellinen ja rakentava katsaus siihen, miltä brändisi näyttää asiakkaan silmin.
   description: >-
@@ -128,5 +111,22 @@
     - Selkeä toimenpidelista
     - Purkupalaveri
   price: ""
-  image: ../assets/images/services/insight.jpg
-  imageAlt: Suurennuslasi vaaleanpunaisten kauneuskuvien päällä
+  image: ../assets/images/new_pics/näkökulma.PNG
+  imageAlt: Nainen(Minttu) huutamassa puhelimeen, taustalla Feedit before and after -kuvia
+
+- id: ugc
+  word: ugc
+  title: UGC-videot kauneusalalle
+  short: Aidon tuntuiset videot, joissa palvelusi ja tuotteesi pääsevät oikeasti esiin.
+  description: >-
+    Kauneusalan UGC-tyylinen video tuntuu suositukselta eikä mainokselta. Teen
+    pystyvideot Reelsiin, TikTokiin ja mainoksiin – ideasta ja
+    käsikirjoituksesta valmiiseen editointiin.
+  includes:
+    - Ideointi ja käsikirjoitus
+    - Kuvaus ja editointi
+    - Tekstitykset ja musiikki
+    - Pystyformaatti Reelsiin ja TikTokiin
+  price: ""
+  image: ../assets/images/new_pics/ugc.PNG
+  imageAlt: Meeri kuvaamassa kauneusalan UGC-videota.
