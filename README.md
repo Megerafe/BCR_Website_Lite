@@ -2,7 +2,7 @@
 
 A lighter, **one-page** version of the **BeautyContentRoom** website built with the exact same design system, colours, fonts, and editable YAML structure as [`BCR_Website`](https://github.com/Megerafe/BCR_Website).
 
-- **Single-page flow:** Hero · Intro · Palvelut · Ilme · Paketit · Portfolio · Prosessi · Tietoa · **Ota yhteyttä (form + contact details)** · Usein kysyttyä (FAQ) + in-page Tietosuojaseloste modal.
+- **Single-page flow:** Full-width Hero · Hero text · Palvelut · Bränditarina · Paketit · Prosessi · Tietoa · **Ota yhteyttä (form + contact details)** · Usein kysyttyä (FAQ) + in-page Tietosuojaseloste modal.
 - **Smooth anchor navigation:** Every header link, hero button, service card, and package card scrolls smoothly to the relevant section — clicking a service or package automatically pre-selects it in the contact form.
 - **Contact form:** Sends enquiries to Formspree (`xljdyznw`), with Finnish validation, honeypot spam protection, and service/package selection.
 
@@ -44,10 +44,9 @@ Everything you normally change lives in **`src/content/`** (texts) and **`src/as
 | File | Controls |
 | --- | --- |
 | `src/content/site.yaml` | Business name, email, phone, Instagram/TikTok, location, Y-tunnus, Formspree ID, top announcement strip, anchor navigation |
-| `src/content/home.yaml` | Hero, intro, services heading, split panel, packages heading, portfolio preview heading, process steps, about teaser |
+| `src/content/home.yaml` | Hero, services heading, brand story panel, packages heading, process steps, about teaser |
 | `src/content/services.yaml` | Service cards (carousel + contact form checkboxes + footer quick-select links) |
 | `src/content/packages.yaml` | Packages Start / Glow / Signature (cards + contact form options) |
-| `src/content/portfolio.yaml` | Portfolio items (items with `featured: true` appear in the homepage strip) |
 | `src/content/faq.yaml` | Frequently asked questions at the bottom of the page |
 | `src/content/pages.yaml` | Contact section intro (`yhteys`) and privacy notice modal (`tietosuoja`) |
 | `src/styles/global.css` | Brand colours, fonts, sizes (the `@theme { … }` block at the top) |

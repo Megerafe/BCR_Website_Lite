@@ -1,5 +1,5 @@
 /**
- * Returns the items of a list collection (services, packages, portfolio, faq)
+ * Returns the items of a list collection (services, packages, faq)
  * in the SAME order as they are written in the YAML file.
  */
 import fs from 'node:fs';
@@ -7,7 +7,7 @@ import path from 'node:path';
 import { parse } from 'yaml';
 import { getCollection } from 'astro:content';
 
-type ListCollection = 'services' | 'packages' | 'portfolio' | 'faq';
+type ListCollection = 'services' | 'packages' | 'faq';
 
 function yamlOrder(name: ListCollection): string[] {
   const file = path.resolve(process.cwd(), `src/content/${name}.yaml`);

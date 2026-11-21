@@ -81,6 +81,7 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
     scroll-behavior: smooth;
     scroll-padding-top: 6rem;
   }
@@ -88,6 +89,7 @@
     @apply bg-white font-sans text-cocoa;
     font-size: clamp(1rem, 0.96rem + 0.15vw, 1.0625rem);
     line-height: 1.6;
+    overflow-x: clip;
   }
   ::selection {
     background: var(--color-blush);

@@ -12,7 +12,7 @@ seo:
     Esteettistä some-sisältöä, UGC-videoita, brändäystä ja yhtenäinen
     visuaalinen ilme kauneushoitoloille, kynsi- ja ripsistudioille ja kampaamoille.
 
-# 1 · Hero – the first thing visitors see
+# 1 · Hero – full-width image with BeautyContentRoom wordmark + intro text & second image
 hero:
   eyebrow: Some- ja markkinointistudio kauneusalalle
   title: social media and marketing for beauty businesses
@@ -26,25 +26,12 @@ hero:
   secondary:
     label: Ota yhteyttä
     href: "#yhteys"
-  image: ../assets/images/hero/hero-hands.jpg
-  imageAlt: Käsi, jossa vaaleanpunaiset geelikynnet, kuvaa sisältöä puhelimella
-  secondImage: ../assets/images/hero/hero-studio.jpg
-  secondImageAlt: Vaaleanpunainen ihonhoitopullo valkoisella jalustalla, taustalla puhelin kuvausjalustalla
+  image: ../assets/images/hero/hero-studio.jpg
+  imageAlt: Vaaleanpunainen ihonhoitopullo valkoisella jalustalla, taustalla puhelin kuvausjalustalla
+  secondImage: ../assets/images/new_pics/4.webp
+  secondImageAlt: Malia poseeraamassa facemask kädessään.
 
-# 2 · Short brand statement on a wide image
-intro:
-  title: kaunis some ei ole sattumaa
-  text: >-
-    BeautyContentRoom auttaa kauneushoitoloita, kynsi- ja ripsistudioita,
-    kampaamoita ja ihonhoidon ammattilaisia kasvamaan somessa. Suunnittelen
-    sisällön, ilmeen ja kanavat niin, että ne puhuvat samaa kieltä – sinun
-    brändisi kieltä.
-  cta:
-    label: Lue lisää minusta
-    href: "#tietoa"
-  image: ../assets/images/pages/intro-wide.jpg
-
-# 3 · Service cards (the cards themselves come from services.yaml)
+# 2 · Service cards (the cards themselves come from services.yaml)
 services:
   title: palvelut
   text: Valitse yksittäinen palvelu tai kokonainen paketti. Jokainen hinta räätälöidään tarpeesi mukaan.
@@ -52,21 +39,20 @@ services:
     label: Pyydä tarjous
     href: "#yhteys"
 
-# 4 · Two-part panel: text + image
+# 3 · Brand story: text + image
 split:
-  eyebrow: Some-ilmeen yhtenäistäminen
-  title: yksi ilme. joka kanavassa.
+  eyebrow: Kaunis some ei ole sattumaa
+  title: Valitseeko asiakas sinut sattumalta?
   text: >-
-    Kun Instagram, TikTok, verkkosivut ja hinnasto näyttävät samalta, asiakas
-    tunnistaa sinut heti. Kokoan värit, fontit, kuvatyylin ja äänensävyn yhdeksi
-    selkeäksi kokonaisuudeksi.
+    Suunnittelen sisällön, ilmeen ja kanavat niin, että brändisi on yhtenäinen ja
+    asiakas haluaa valita juuri sinut tarjolla olevista vaihtoehdoista.
   cta:
-    label: Katso esimerkit
-    href: "#portfolio"
-  image: ../assets/images/pages/brand-world.jpg
-  imageAlt: Vaaleanpunainen brändimaailma – puhelin, käyntikortti, kangaskassi ja seerumipullo
+    label: Tutustu paketteihin
+    href: "#paketit"
+  image: ../assets/images/new_pics/BeautyContentRoom.WEBP
+  imageAlt: Minttu lasit päässä, hiukset kiharalla
 
-# 5 · Packages (the package cards come from packages.yaml)
+# 4 · Packages (the package cards come from packages.yaml)
 packages:
   title: paketit
   text: Valmiit kokonaisuudet helpottavat valintaa. Hinnat tarjouksen mukaan – valitse paketti, niin palaan sinulle.
@@ -76,15 +62,7 @@ packages:
     label: Kokoa oma
     href: "#yhteys"
 
-# 6 · Portfolio preview (the images come from portfolio.yaml – items with featured: true)
-portfolio:
-  title: portfolio
-  text: Kurkista, millaista sisältöä ja ilmettä teen kauneusalan yrityksille.
-  cta:
-    label: Ota yhteyttä
-    href: "#yhteys"
-
-# 7 · Process steps
+# 5 · Process steps
 process:
   title: näin edetään
   text: Selkeä prosessi, jossa tiedät aina, mitä seuraavaksi tapahtuu.
@@ -109,5 +87,5 @@ about:
   cta:
     label: Ota yhteyttä
     href: "#yhteys"
-  image: ../assets/images/pages/about-bts.jpg
-  imageAlt: Kädet asettelevat ihonhoitotuotetta ja pioneja kuvausta varten
+  image: ../assets/images/new_pics/BeautyContentRoom2.JPG
+  imageAlt: Kuva Meeristä

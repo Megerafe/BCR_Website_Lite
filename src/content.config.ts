@@ -55,12 +55,6 @@ const home = defineCollection({
         secondImage: image().optional(),
         secondImageAlt: z.string().default(''),
       }),
-      intro: z.object({
-        title: z.string(),
-        text: z.string(),
-        cta: link,
-        image: image(),
-      }),
       services: z.object({ title: z.string(), text: z.string(), cta: link }),
       split: z.object({
         eyebrow: z.string(),
@@ -77,7 +71,6 @@ const home = defineCollection({
         customText: z.string(),
         customCta: link,
       }),
-      portfolio: z.object({ title: z.string(), text: z.string(), cta: link }),
       process: z.object({
         title: z.string(),
         text: z.string(),
@@ -124,22 +117,6 @@ const packages = defineCollection({
   }),
 });
 
-/* ------------------------------------------------------------- portfolio */
-const portfolio = defineCollection({
-  loader: file('src/content/portfolio.yaml'),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      client: z.string().default(''),
-      category: z.string(),
-      image: image(),
-      alt: z.string(),
-      video: z.string().default(''),
-      shape: z.enum(['tall', 'square', 'wide']).default('tall'),
-      featured: z.boolean().default(false),
-    }),
-});
-
 /* ------------------------------------------------------------------- faq */
 const faq = defineCollection({
   loader: file('src/content/faq.yaml'),
@@ -159,4 +136,4 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { site, home, services, packages, portfolio, faq, pages };
+export const collections = { site, home, services, packages, faq, pages };

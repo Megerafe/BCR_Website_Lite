@@ -82,7 +82,7 @@
 
 - id: materiaalit
   word: visuals
-  title: Verkkosivu- ja somemateriaalit
+  title: Visuaalinen ilme ja somemateriaalit
   short: Hinnastot, bannerit, kansikuvat ja grafiikat samaan ilmeeseen.
   description: >-
     Teen yrityksellesi materiaalit, joita tarvitset arjessa: hinnastot,
@@ -128,5 +128,5 @@
     - Tekstitykset ja musiikki
     - Pystyformaatti Reelsiin ja TikTokiin
   price: ""
-  image: ../assets/images/new_pics/ugc.PNG
-  imageAlt: Meeri kuvaamassa kauneusalan UGC-videota.
+  image: ../assets/images/new_pics/7.webp
+  imageAlt: Meeri ottamassa selfie kuvia.
