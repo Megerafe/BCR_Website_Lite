@@ -26,7 +26,7 @@ hero:
   secondary:
     label: Ota yhteyttä
     href: "#yhteys"
-  image: ../assets/images/hero/hero-studio.jpg
+  image: ../assets/images/new_pics/isokuvafinal.webp
   imageAlt: Vaaleanpunainen ihonhoitopullo valkoisella jalustalla, taustalla puhelin kuvausjalustalla
   secondImage: ../assets/images/new_pics/4.webp
   secondImageAlt: Malia poseeraamassa facemask kädessään.
@@ -79,7 +79,7 @@ process:
 # 8 · About teaser
 about:
   eyebrow: BeautyContentRoomin takana
-  title: hei, olen meeri
+  title: Hei, olen Meeri
   text: >-
     Rakastan kauneusalaa ja kaikkea visuaalista. Autan yrittäjiä näyttämään
     somessa yhtä ammattimaisilta ja kauniilta kuin he oikeasti ovat – ilman,

@@ -83,7 +83,7 @@
     -moz-osx-font-smoothing: grayscale;
     overflow-x: clip;
     scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 7.25rem;
   }
   body {
     @apply bg-white font-sans text-cocoa;

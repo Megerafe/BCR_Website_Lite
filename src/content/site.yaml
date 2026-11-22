@@ -26,8 +26,8 @@ instagram:
   handle: "@beautycontentroom" # TODO: check the real handle
   url: https://www.instagram.com/beautycontentroom/
 tiktok:
-  handle: ""
-  url: ""
+  handle: "@beautycontentroom" # TODO: check the real handle
+  url: https://www.tiktok.com/@beautycontentroom
 
 # Formspree form ID (the last part of https://formspree.io/f/xljdyznw)
 formspreeId: xljdyznw

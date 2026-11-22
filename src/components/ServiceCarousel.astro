@@ -23,7 +23,7 @@ const services = await getOrdered('services');
               </p>
               <span class="label pt-1 text-rose-deep/80">{String(i + 1).padStart(2, '0')}</span>
             </div>
-            <div class="mt-5 aspect-[4/5] overflow-hidden rounded-inner bg-white">
+            <div class="mt-4 aspect-square overflow-hidden rounded-inner bg-white sm:mt-5 sm:aspect-[4/5]">
               <Image
                 src={s.data.image}
                 alt={s.data.imageAlt}
@@ -67,7 +67,7 @@ const services = await getOrdered('services');
 
 <style>
   .service-slide {
-    width: 80%;
+    width: 72%;
   }
   @media (min-width: 640px) {
     .service-slide {

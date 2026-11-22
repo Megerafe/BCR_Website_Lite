@@ -14,6 +14,7 @@ import ProcessSteps from '../components/ProcessSteps.astro';
 import ContactForm from '../components/ContactForm.astro';
 import FaqList from '../components/FaqList.astro';
 import Icon from '../components/Icon.astro';
+import heroLogo from '../assets/brand/bcr_logo_yellow.png';
 import contactImage from '../assets/images/new_pics/BeautyContentRoom.jpg';
 
 const home = (await getEntry('home', 'main'))!.data;
@@ -25,23 +26,36 @@ const { hero, services, split, packages, process, about } = home;
 <BaseLayout title={home.seo.title} description={home.seo.description}>
   <!-- 1 · FULL-WIDTH HERO IMAGE ─────────────────────────────── -->
   <section class="relative" aria-label="BeautyContentRoom">
-    <div class="hero-media relative h-[min(78vh,760px)] min-h-96 overflow-hidden sm:min-h-[30rem]">
+    <div class="hero-media relative overflow-hidden">
       <Image
         src={hero.image}
         alt={hero.imageAlt}
         widths={[800, 1200, 1800, 2400]}
         sizes="100vw"
-        class="absolute inset-0 size-full object-cover object-[58%_center] sm:object-center"
+        class="absolute inset-0 size-full origin-bottom scale-[1.32] object-cover object-center sm:scale-[1.24] md:origin-center md:scale-[1.06] lg:scale-[1.02]"
         loading="eager"
         fetchpriority="high"
       />
       <div class="absolute inset-0 bg-black/10" aria-hidden="true"></div>
-      <p
-        class="hero-wordmark display-thin absolute bottom-4 left-1/2 w-[calc(100%-2rem)] -translate-x-1/2 text-center text-white sm:bottom-8"
+      <div
+        class="hero-overlay pointer-events-none absolute inset-x-0 bottom-3 flex flex-col items-center sm:bottom-6"
         aria-hidden="true"
       >
-        BeautyContentRoom
-      </p>
+        <div class="hero-logo">
+          <Image
+            src={heroLogo}
+            alt=""
+            widths={[600, 1000, 1400]}
+            sizes="(min-width: 1024px) 34vw, 60vw"
+            class="hero-logo-img"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+        <p class="hero-wordmark display-thin text-center text-butter">
+          BeautyContentRoom
+        </p>
+      </div>
     </div>
   </section>
 
@@ -59,13 +73,16 @@ const { hero, services, split, packages, process, about } = home;
       </div>
       {
         hero.secondImage && (
-          <div class="relative aspect-[4/5] overflow-hidden md:aspect-auto md:min-h-[34rem]" data-reveal="clip">
+          <div
+            class="relative mx-auto aspect-[4/5] w-full max-w-[17rem] overflow-hidden md:mx-0 md:aspect-auto md:min-h-[30rem] md:max-w-none md:rounded-none"
+            data-reveal="clip"
+          >
             <Image
               src={hero.secondImage}
               alt={hero.secondImageAlt}
               widths={[600, 900, 1300]}
-              sizes="(min-width: 768px) 50vw, 100vw"
-              class="absolute inset-0 size-full object-cover object-[58%_center] md:object-center"
+              sizes="(min-width: 768px) 50vw, 272px"
+              class="absolute inset-0 size-full object-cover object-top md:object-center"
             />
           </div>
         )
@@ -83,21 +100,23 @@ const { hero, services, split, packages, process, about } = home;
 
   <!-- 4 · BRAND STORY ───────────────────────────────────────── -->
   <section class="px-gutter pt-[var(--spacing-section)]" aria-labelledby="split-title">
-    <div class="panel grid bg-tan-50 md:grid-cols-2">
-      <div class="flex flex-col justify-center px-6 py-12 sm:px-10 lg:px-16 lg:py-20" data-reveal>
+    <div class="grid items-center gap-4 sm:gap-5 md:grid-cols-12">
+      <div class="panel flex flex-col justify-center bg-tan-50 px-6 py-10 sm:px-10 md:col-span-8 lg:px-16 lg:py-16" data-reveal>
         <p class="eyebrow">{split.eyebrow}</p>
         <h2 id="split-title" class="display-bold mt-4 text-display">{split.title}</h2>
         <p class="mt-6 max-w-md text-cocoa/95">{split.text}</p>
         <a href={split.cta.href} class="btn btn-outline mt-8 self-start">{split.cta.label}</a>
       </div>
-      <div class="relative aspect-[4/5] overflow-hidden md:aspect-auto md:min-h-[36rem]">
-        <Image
-          src={split.image}
-          alt={split.imageAlt}
-          widths={[600, 900, 1300]}
-          sizes="(min-width: 768px) 50vw, 100vw"
-          class="absolute inset-0 size-full object-cover object-[62%_center] md:object-center"
-        />
+      <div class="flex justify-center md:col-span-4">
+        <div class="panel relative aspect-[4/5] w-full max-w-[15rem] bg-white sm:max-w-[17rem] md:max-w-[20rem]" data-reveal>
+          <Image
+            src={split.image}
+            alt={split.imageAlt}
+            widths={[800, 1200, 1600]}
+            sizes="(min-width: 768px) 710px, 535px"
+            class="absolute inset-0 size-full object-cover object-top"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -120,17 +139,19 @@ const { hero, services, split, packages, process, about } = home;
 
   <!-- 7 · ABOUT TEASER ──────────────────────────────────────── -->
   <section id="tietoa" class="px-gutter pt-[var(--spacing-section)]" aria-labelledby="about-title">
-    <div class="grid gap-3 sm:gap-4 md:grid-cols-12 lg:gap-5">
-      <div class="panel relative aspect-[4/5] md:col-span-5 md:aspect-auto md:min-h-[34rem]" data-reveal="clip">
-        <Image
-          src={about.image}
-          alt={about.imageAlt}
-          widths={[500, 800, 1100]}
-          sizes="(min-width: 768px) 40vw, 100vw"
-          class="absolute inset-0 size-full object-cover"
-        />
+    <div class="grid items-center gap-4 sm:gap-5 md:grid-cols-12">
+      <div class="flex justify-center md:col-span-4">
+        <div class="panel relative aspect-[3/4] w-full max-w-[15rem] bg-white sm:max-w-[17rem] md:max-w-[20rem]" data-reveal>
+          <Image
+            src={about.image}
+            alt={about.imageAlt}
+            widths={[400, 640, 900]}
+            sizes="(min-width: 768px) 320px, 240px"
+            class="absolute inset-0 size-full object-cover object-top"
+          />
+        </div>
       </div>
-      <div class="panel flex flex-col justify-end bg-tan-50 px-6 py-12 sm:px-10 md:col-span-7 lg:px-16 lg:py-16" data-reveal>
+      <div class="panel flex flex-col justify-center bg-tan-50 px-6 py-10 sm:px-10 md:col-span-8 lg:px-16 lg:py-16" data-reveal>
         <p class="eyebrow">{about.eyebrow}</p>
         <h2 id="about-title" class="display-thin mt-4 text-display">{about.title}</h2>
         <p class="mt-6 max-w-lg text-ink">{about.text}</p>
@@ -173,8 +194,30 @@ const { hero, services, split, packages, process, about } = home;
               site.instagram?.url && (
                 <li class="flex items-center gap-3">
                   <Icon name="instagram" class="size-5 text-rose-deep" />
-                  <a href={site.instagram.url} target="_blank" rel="noopener noreferrer" class="text-link">
+                  <a
+                    href={site.instagram.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-link"
+                    aria-label={`Instagram ${site.instagram.handle || ''}`.trim()}
+                  >
                     {site.instagram.handle || 'Instagram'}
+                  </a>
+                </li>
+              )
+            }
+            {
+              site.tiktok?.url && (
+                <li class="flex items-center gap-3">
+                  <Icon name="tiktok" class="size-5 text-rose-deep" />
+                  <a
+                    href={site.tiktok.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-link"
+                    aria-label={`TikTok ${site.tiktok.handle || ''}`.trim()}
+                  >
+                    {site.tiktok.handle || 'TikTok'}
                   </a>
                 </li>
               )
@@ -227,6 +270,27 @@ const { hero, services, split, packages, process, about } = home;
 </BaseLayout>
 
 <style>
+  .hero-media {
+    height: clamp(12.5rem, 48vw, 35rem);
+  }
+  .hero-overlay {
+    gap: clamp(0.5rem, 1.8vw, 1.65rem);
+  }
+  .hero-logo {
+    position: relative;
+    width: clamp(6rem, 18vw, 17rem);
+    aspect-ratio: 1145 / 435;
+    overflow: hidden;
+    filter: drop-shadow(0 0.15rem 1.25rem rgb(0 0 0 / 0.24));
+  }
+  .hero-logo-img {
+    position: absolute;
+    width: 174.6725%;
+    max-width: none;
+    height: auto;
+    left: -37.2926%;
+    top: -146.4368%;
+  }
   .hero-wordmark {
     width: calc(100% - 1rem);
     padding-inline: 0.5rem;
@@ -234,7 +298,7 @@ const { hero, services, split, packages, process, about } = home;
     line-height: 0.86;
     letter-spacing: -0.045em;
     white-space: nowrap;
-    color: #fff;
-    text-shadow: 0 0.15rem 1.5rem rgb(0 0 0 / 0.18);
+    color: var(--color-butter);
+    text-shadow: 0 0.15rem 1.5rem rgb(0 0 0 / 0.24);
   }
 </style>

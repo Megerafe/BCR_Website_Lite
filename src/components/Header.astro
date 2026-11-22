@@ -1,5 +1,5 @@
 ---
-/** Sticky header for one-page Lite site: anchor navigation left, logo centre, Instagram + contact button right. */
+/** Sticky header for one-page Lite site: anchor navigation left, logo centre, Instagram + TikTok + contact button right. */
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
 
@@ -9,6 +9,7 @@ interface Props {
     nav: { label: string; href: string }[];
     cta: { label: string; href: string };
     instagram?: { handle?: string; url?: string };
+    tiktok?: { handle?: string; url?: string };
     email?: string;
   };
 }
@@ -18,16 +19,16 @@ const resolveHref = (href: string) => (!isHome && href.startsWith('#') ? `/${hre
 ---
 
 <header class="site-header sticky top-0 z-50 px-gutter" data-header>
-  <div class="header-bar grid h-16 grid-cols-[1fr_auto_1fr] items-center gap-4 lg:h-[4.5rem]">
+  <div class="header-bar grid h-[4.75rem] grid-cols-[1fr_auto_1fr] items-center gap-4 lg:h-[5.75rem]">
     <!-- left: desktop navigation / mobile menu button -->
     <nav aria-label="Päävalikko" class="hidden lg:block">
-      <ul class="flex items-center gap-5 xl:gap-7">
+      <ul class="flex items-center gap-6 xl:gap-8">
         {
           site.nav.map((item) => (
             <li>
               <a
                 href={resolveHref(item.href)}
-                class="nav-link label !text-[0.8125rem] text-cocoa"
+                class="nav-link label !text-[0.9375rem] text-cocoa"
                 data-nav-link={item.href.startsWith('#') ? item.href.slice(1) : undefined}
               >
                 {item.label}
@@ -39,38 +40,57 @@ const resolveHref = (href: string) => (!isHome && href.startsWith('#') ? `/${hre
     </nav>
     <button
       type="button"
-      class="menu-toggle -ml-2 flex size-11 items-center justify-center rounded-full text-cocoa lg:hidden"
+      class="menu-toggle -ml-2 flex size-12 items-center justify-center rounded-full text-cocoa lg:hidden"
       aria-expanded="false"
       aria-controls="mobile-menu"
       aria-label="Avaa valikko"
       data-menu-toggle
     >
-      <Icon name="menu" class="icon-open size-6" />
-      <Icon name="x" class="icon-close hidden size-6" />
+      <Icon name="menu" class="icon-open size-7" />
+      <Icon name="x" class="icon-close hidden size-7" />
     </button>
 
     <!-- centre: logo -->
     <a href={isHome ? '#top' : '/'} class="logo-link flex items-center justify-center text-rose" aria-label={`${site.name} – alkuun`}>
-      <Logo class="h-6 w-auto lg:h-8" title={site.name} />
+      <Logo class="h-8 w-auto lg:h-10" title={site.name} />
     </a>
 
-    <!-- right: instagram + contact -->
-    <div class="flex items-center justify-end gap-3">
+    <!-- right: instagram + tiktok + contact -->
+    <div class="flex items-center justify-end gap-3.5">
       {
-        site.instagram?.url && (
-          <a
-            href={site.instagram.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hidden size-11 items-center justify-center rounded-full text-cocoa transition-colors hover:bg-blush-50 lg:flex"
-            aria-label="Instagram (avautuu uuteen välilehteen)"
-          >
-            <Icon name="instagram" class="size-5" />
-          </a>
+        (site.instagram?.url || site.tiktok?.url) && (
+          <div class="hidden items-center gap-1 lg:flex">
+            {
+              site.instagram?.url && (
+                <a
+                  href={site.instagram.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex size-12 items-center justify-center rounded-full text-cocoa transition-colors hover:bg-blush-50"
+                  aria-label="Instagram (avautuu uuteen välilehteen)"
+                >
+                  <Icon name="instagram" class="size-[1.375rem]" />
+                </a>
+              )
+            }
+            {
+              site.tiktok?.url && (
+                <a
+                  href={site.tiktok.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex size-12 items-center justify-center rounded-full text-cocoa transition-colors hover:bg-blush-50"
+                  aria-label="TikTok (avautuu uuteen välilehteen)"
+                >
+                  <Icon name="tiktok" class="size-[1.375rem]" />
+                </a>
+              )
+            }
+          </div>
         )
       }
-      <a href={resolveHref(site.cta.href)} class="btn btn-primary btn-sm hidden sm:inline-flex">{site.cta.label}</a>
-      <a href={resolveHref(site.cta.href)} class="label !text-[0.75rem] text-cocoa underline underline-offset-4 sm:hidden">yhteys</a>
+      <a href={resolveHref(site.cta.href)} class="btn btn-primary hidden sm:inline-flex">{site.cta.label}</a>
+      <a href={resolveHref(site.cta.href)} class="label !text-[0.8125rem] text-cocoa underline underline-offset-4 sm:hidden">yhteys</a>
     </div>
   </div>
 
@@ -97,13 +117,44 @@ const resolveHref = (href: string) => (!isHome && href.startsWith('#') ? `/${hre
       </ul>
       <div class="flex flex-col gap-4 pt-6">
         <a href={resolveHref(site.cta.href)} class="btn btn-primary w-full" data-mobile-link>{site.cta.label}</a>
-        <div class="flex items-center justify-between text-sm">
+        <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 text-sm">
           {site.email && <a href={`mailto:${site.email}`} class="text-link">{site.email}</a>}
           {
-            site.instagram?.url && (
-              <a href={site.instagram.url} target="_blank" rel="noopener noreferrer" class="text-link">
-                {site.instagram.handle || 'Instagram'}
-              </a>
+            (site.instagram?.url || site.tiktok?.url) && (
+              <div class="flex flex-wrap items-center gap-4">
+                {
+                  site.instagram?.url && (
+                    <span class="inline-flex items-center gap-1.5">
+                      <Icon name="instagram" class="size-4 text-rose-deep" />
+                      <a
+                        href={site.instagram.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-link"
+                        aria-label={`Instagram ${site.instagram.handle || ''}`.trim()}
+                      >
+                        {site.instagram.handle || 'Instagram'}
+                      </a>
+                    </span>
+                  )
+                }
+                {
+                  site.tiktok?.url && (
+                    <span class="inline-flex items-center gap-1.5">
+                      <Icon name="tiktok" class="size-4 text-rose-deep" />
+                      <a
+                        href={site.tiktok.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-link"
+                        aria-label={`TikTok ${site.tiktok.handle || ''}`.trim()}
+                      >
+                        {site.tiktok.handle || 'TikTok'}
+                      </a>
+                    </span>
+                  )
+                }
+              </div>
             )
           }
         </div>
@@ -145,7 +196,7 @@ const resolveHref = (href: string) => (!isHome && href.startsWith('#') ? `/${hre
   }
   .mobile-menu {
     position: fixed;
-    top: 4rem;
+    top: 4.75rem;
     left: 0;
     right: 0;
     bottom: 0;
